@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>DefiRilla Realtime Crypto Alerts</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-y: scroll; /* Always show vertical scrollbar */
+            font-family: 'Roboto', sans-serif;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('defirilla.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: fadeIn 3s forwards;
+            z-index: -1;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+            color: white;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+        .box {
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 100%;
+            width: 950px;
+            height: 80vh; /* Box height fixed */
+            overflow-y: auto; /* Make the box scrollable */
+        }
+        iframe {
+            width: 100%;
+            height: 700px;
+            border: none;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .content ul {
+            padding: 0;
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .content li {
+            display: flex;
+            align-items: center;
+        }
+
+        .content li::before {
+            content: "\2713";
+            color: white;
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .content ul {
+                gap: 15px;
+            }
+        }
+
+        h1 {
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="content">
+        <div class="box">
+            <h1>Pre-Alpha Restricted VIP Access</h1>
+            <h2>DefiRilla - Automatic Realtime Crypto Alerts:</h2>
+            
+            <ul>
+                <li>Auto discovery of ALL EVM Defi sites and blockchains (including new ones)</li>
+                <li>LPs entered/exited range</li>
+                <li>Actual calculated borrow/supply/reward APRs</li>
+                <li>Health ratios</li>
+                <li>When most profitable to sell wallet/reward coins</li>
+                <li>Airdrops received</li>
+                <li>&amp; more</li>
+            </ul>
+
+            <br/>
+
+            <b>Thank you</b> for being one of our about 20 VIPs to try our novel alerts in return for expert feedback if they offer value to the crypto community
+
+            <br/><br>
+            
+            Scroll to bottom of the page to see the most recently generated alerts
+
+            <br/><br/>
+
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdcEyubSeHfekHZIUF_LxE1EvGr9QPvpyUOxwUiaP6gZCLjnQ/viewform?embedded=true" frameborder="0">Loading…</iframe>
+
+            <br/>
+
+            <iframe src="https://rilla-ce98ccb62eca.herokuapp.com/most_recent_alerts.html" frameborder="0" style="width: 100%; height: 500px; border: none;">Loading...</iframe>
+
+        </div>
+    </div>
+</body>
+</html>
