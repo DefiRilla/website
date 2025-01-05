@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>DefiRilla Realtime Crypto Alerts</title>
+    <title>DefiRilla Realtime Crypto Defi Monitoring Notifications</title>
     <style>
         body, html {
             margin: 0;
@@ -102,6 +102,21 @@
             color: red;
         }
 
+        button {
+            font-size: 18px;
+            padding: 15px 25px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+
     </style>
 </head>
 <body>
@@ -109,33 +124,52 @@
     <div class="content">
         <div class="box">
             <h1>Pre-Alpha Restricted VIP Expert Access</h1>
-            <h2>DefiRilla - Automatic Realtime Crypto Monitoring Alerts:</h2>
+            <h2>DefiRilla - Automatic Realtime Defi Monitoring Notifications:</h2>
             
             <ul>
-                <li>Auto discovery of ALL EVM Coins and Defi protocol sites (including new ones!)</li>
-                <li>ALL EVM blockchains</li>
-                <li>Entered/exited Defi positions</li>
-                <li>Liquidity positions entered/exited active reward range</li>
-                <li>Actual calculated borrow/supply/reward APRs</li>
-                <li>Health ratios</li>
-                <li>When most profitable to sell wallet/reward coins</li>
-                <li>Airdrops received</li>
+                <li>Auto discovery of ALL your EVM Defi protocol sites and coins (including newly launched protocols)</li>
+                <li>Across ALL your EVM blockchains</li>
+                <li>When you enter/exit/modify Defi positions e.g. lending</li>
+                <li>When your liquidity positions enter/exit active reward range</li>
+                <li>Your actual calculated borrow/supply/reward APRs</li>
+                <li>Your health ratios</li>
+                <li>When most favourable to sell your wallet/reward coins to your favourite HODL coin</li>
+                <li>Airdrops you receive</li>
                 <li>&amp; more</li>
             </ul>
 
-            <br/>
-
-            <b>Thank you</b> for being one of our 20ish VIP experts invited to try our novel alerts in return for expert feedback if these realtime alerts offer value to the crypto community?
-
-            <br/><br>
-            
-            Scroll to bottom of the page to <b><a href=#alerts>see the most recently generated alerts sent</a></b>
+            Scroll to bottom of the page to <b><a href=#alerts>see the actual most recently generated Defi otifications sent to other experts</a></b>
 
             <br/><br/>
 
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdcEyubSeHfekHZIUF_LxE1EvGr9QPvpyUOxwUiaP6gZCLjnQ/viewform?embedded=true" frameborder="0">Loading…</iframe>
+            <hr/><br/><br/>
 
-            <br/>
+
+            <b>Thank you</b> for being one of our 20+ VIP experts invited to try our novel Defi notifications in return for your expert feedback if our novel Defi realtime monitoring notifications service offers value to our crypto community?
+
+            
+            
+            
+
+            <br/><br/><br/>
+
+            To start monitoring your own/anyone's EVM wallet's Defi positions, please choose how you'd like to receive notifications:
+
+            <br/><br/><br/>
+
+            <div id="iframe-container">
+            
+                <button onclick="document.getElementById('iframe-container').innerHTML = `<iframe src='https://docs.google.com/forms/d/e/1FAIpQLSdcEyubSeHfekHZIUF_LxE1EvGr9QPvpyUOxwUiaP6gZCLjnQ/viewform?embedded=true' frameborder='0'></iframe>`">Detailed notifications, with explanations and calculations via email</button>
+
+                <br/>&nbsp;&nbsp;OR&nbsp;&nbsp;
+            
+                <button onclick="window.open(`https://web.telegram.org/a/#7873315868`, `_blank`)">Simplified notifications via Telegram</button>
+
+            </div>
+
+            <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdcEyubSeHfekHZIUF_LxE1EvGr9QPvpyUOxwUiaP6gZCLjnQ/viewform?embedded=true" frameborder="0">Loading…</iframe> -->
+
+            <br/><br/><hr/>
 
             <iframe id="alerts" src="https://defir-330f01ac30a4.herokuapp.com/most_recent_alerts.html" frameborder="0" style="width: 100%; height: 500px; border: none;">Loading...</iframe>
 
