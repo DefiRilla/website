@@ -3,23 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DefiRilla</title>
+    <meta name="robots" content="noindex, nofollow">
+    <title>DeFiRilla - Your Realtime Crypto DeFi Yield Wallet Monitoring Notifications</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
-            width: 100%;
             height: 100%;
-            overflow: hidden;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-y: scroll; /* Always show vertical scrollbar */
+            font-family: 'Roboto', sans-serif;
         }
-        img {
+    
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            background-image: url('defirilla.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: fadeIn 3s forwards;
+            z-index: -1;
+        }
+    
+        @keyframes fadeIn {
+            to {
+                opacity: 0.4;
+            }
+        }
+    
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+            color: white;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+    
+        .box {
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 100%;
+            width: 1000px;
+            height: 80vh;
+            overflow-y: auto;
+        }
+    
+        iframe {
+            width: 100%;
+            height: 700px;
+            border: none;
+            display: block;
+            margin-bottom: 20px;
+        }
+    
+        .content a {
+            color: white;
+        }
+    
+        .content a:hover {
+            color: grey;
+        }
+    
+        .content ul {
+            padding: 0;
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+    
+        .content li {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping */
+            word-wrap: break-word; /* Allow breaking long words */
+        }
+    
+        .content li::before {
+            content: "\2713";
+            color: white;
+            font-size: 24px;
+            margin-right: 10px;
+        }
+    
+        @media (max-width: 768px) {
+            .content ul {
+                gap: 15px;
+            }
+            .highlight {
+                white-space: normal; /* Allow wrapping of the span on smaller screens */
+            }
+        }
+    
+        h1 {
+            color: orange;
+        }
+    
+        button {
+            font-size: 18px;
+            padding: 15px 25px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    
+        button:hover {
+            background-color: #0056b3;
+        }
+    
+        .highlight {
+            color: orange;
+            text-decoration: underline;
+            font-weight: bold;
+            /* white-space: nowrap; Prevent breaking of the span across lines */
         }
     </style>
+    
 </head>
 <body>
-    <img src="defirilla.png" alt="DefiRilla">
+    <div class="background"></div>
+    <div class="content">
+        <div class="box">
+            <!-- <h1>Expert DeFi Yield Farmer Feedback Request</h1> -->
+
+   
+            <h1>DeFi Yield Wallet Monitoring Notification Alerts</h1>
+
+            <h2>Auto discovery and alerting on <b>ALL</b> your wallet's EVM coins and <b>ALL</b> your wallet's DeFi protocol sites (including newly launched protocols) across <b>ALL</b> EVM blockchains:</h2>
+
+            <ul>
+                <!--
+                <li>Auto discovery of ALL your EVM DeFi protocol sites and coins (including newly launched protocols)</li>
+                <li>Supports ALL your EVM blockchains</li>
+                -->
+                <li>
+                    Know when your liquidity positions&nbsp;<em class="highlight">enter/exit active reward range</em>&nbsp;and are&nbsp;<b>earning you rewards</b>
+                    <!-- makes and saves people money -->
+                </li>
+                <li>
+                    Know your actual calculated&nbsp;<em class="highlight">current yield borrow/supply/reward APRs</em>&nbsp;=> ensure you are always&nbsp;<b>beating the market</b>
+                    <!-- makes and saves people money -->
+                </li>
+                <li>
+                    Know your current&nbsp;<em class="highlight">health ratios</em>&nbsp;=>&nbsp;<b>safely leverage/borrow more</b>&nbsp;getting notified of possible liquidations before they happen
+                    <!-- saves people money -->
+                </li>
+                <li>
+                    Know when your&nbsp;<em class="highlight">limit orders execute</em>&nbsp;=> make more by immediately putting your coins to use
+                </li>
+                <li>
+                    Know when is&nbsp;<em class="highlight">most favourable to sell your wallet/reward coins</em>&nbsp;to your favourite HODL coin (defaults to USD - contact us to change)
+                    <!-- makes people money -->
+                </li>
+                <li>Know when your DeFi positions change significantly</li>
+                <li>Know when you enter/exit/modify DeFi positions</li>
+                <li>
+                    Know as soon as you receive Airdrops
+                    <!-- makes people money -->
+                </li>
+                <li>&amp; more</li>
+            </ul>
+
+            <br/><hr/><br/>
+
+            <iframe id="alerts" src="https://DeFir-330f01ac30a4.herokuapp.com/most_recent_alerts.html" frameborder="0" style="width: 100%; height: 500px; border: none;">Loading...</iframe>
+
+            <br/><br/><hr/><br/>
+
+
+            <h2>Motivation</h2>
+
+            I started this personal project three years ago after getting badly liquidated and my remaining crypto was returned to me converted into stable coins.
+            
+            <br/><br/>I did not notice for weeks.
+
+            <br/><br/>Unfortunately, when I did notice the crypto market had pumped considerably, and I was only able to convert the returned stable coins into a tiny fraction of my original crypto.
+
+            <br/><br/>The DeFi site had no kind of monitoring or alerting system.
+
+            <br/><br/>The final straw was when Aave removed their health notification system, I knew I had to find a DeFi monitoring solution.
+
+            <br/><br/>I tried every existing "monitoring" and "alert" system but none provided the health factor alerts I required across ALL DeFi yield protocols.
+
+            <br/><br/>So I set out on a personal project to build realtime notification alerts for myself.
+
+            <br/><br/>It turned out to be much more complicated than I anticipated to autodetect and support all DeFi sites across all EVM chains and provide realtime alerts on their health factors.
+
+            <br/><br/>But I finally managed it.
+            
+            <br/><br/>It was then relatively trivial to add a whole range of different alerts which save me time and effort including real reward, borrow & supply APRs, when my DeFi limit orders hit, and more recently alerts when my LPs exit range.
+
+            <br/><br/>When describing the platform to my non crypto mentors, as there is nothing like it, they recommend I seek feedback from other crypto DeFi yield experts if it also adds value to them and is worth developing into a Startup.
+
+            <br/><br/>And here we are today.
+            
+            <br/><br/>I am currently working on it full time to keep it up, resolve bugs and implement requested features.
+            
+            <br/><br/><b>I appreciate you being early and also your time, patience and expertise</b>.
+
+            <br/><br/><br/>support {AT} defirilla.com
+
+        </div>
+    </div>
 </body>
 </html>
