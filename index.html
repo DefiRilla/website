@@ -54,7 +54,7 @@
             background-color: rgba(0, 0, 0, 0.4);
             padding: 40px;
             border-radius: 10px;
-            text-align: center;
+            text-align: left;
             max-width: 100%;
             width: 1000px;
             height: 80vh;
@@ -81,7 +81,7 @@
             padding: 0;
             list-style-type: none;
             display: flex;
-            justify-content: center;
+            justify-content: left;
             gap: 30px;
             flex-wrap: wrap;
         }
@@ -111,6 +111,18 @@
     
         h1 {
             color: orange;
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        #iframe-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center buttons horizontally */
+            text-align: center;
         }
     
         button {
@@ -182,7 +194,35 @@
                 <li>&amp; more</li>
             </ul>
 
-            <br/><hr/><br/>
+
+
+            <br/><br/><hr/><br/>
+
+
+            <h1>DeFi monitoring alerts on your wallet</h1>
+
+            It just takes <b>5 seconds</b> to join the waitlist to start monitoring your own/anyone's* EVM wallet's DeFi positions via Telegram or email notifications (no signup, no wallet connection, no wallet signing):
+
+            <br/><br/><small>Please only request alerts on your main best wallet with most DeFi yield positions as our servers cannot scale at this time
+
+            <br/><br/>
+
+            <div id="iframe-container">
+            
+                <button onclick="document.getElementById('iframe-container').innerHTML = `<iframe src='https://docs.google.com/forms/d/e/1FAIpQLSfH3PLLzpEZXMP8sLXTd2Stb4VAPJRA6izhielsfV90yn2FPw/viewform?embedded=true' frameborder='0'></iframe>`">Request DeFi monitoring alerts</button>
+
+            </div>
+
+            <br/><small>* please bear in mind that if you are not familiar with someone else's positions it maybe hard to make sense of their alerts</small>
+
+            <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdcEyubSeHfekHZIUF_LxE1EvGr9QPvpyUOxwUiaP6gZCLjnQ/viewform?embedded=true" frameborder="0">Loading…</iframe> -->
+
+            <br/><br/><br/><hr/><br/>
+
+            <iframe id="alerts" src="https://DeFir-330f01ac30a4.herokuapp.com/most_recent_alerts.html" frameborder="0" style="width: 100%; height: 500px; border: none;">Loading...</iframe>
+
+            <br/><br/><hr/><br/>
+
 
             <iframe id="alerts" src="https://DeFir-330f01ac30a4.herokuapp.com/most_recent_alerts.html" frameborder="0" style="width: 100%; height: 500px; border: none;">Loading...</iframe>
 
