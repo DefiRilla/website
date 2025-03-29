@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <meta name="robots" content="noindex, nofollow"> -->
     <title>DeFiRilla - Your Realtime Crypto DeFi Yield Wallet Monitoring Notifications</title>
+
+
+
+<script>
+// Check if the device is Android
+if (/Android/i.test(navigator.userAgent)) {
+    document.body.classList.add('android');
+}
+</script>
+    
+
     <style>
         body, html {
             margin: 0;
@@ -107,16 +118,6 @@
             .highlight {
                 white-space: normal; /* Allow wrapping of the span on smaller screens */
             }
-
-
-.content li {
-font-size: 22px !important; /* Increase font size for <li> */
-}
-
-button {
-font-size: 22px !important; /* Increase font size for buttons */
-}
-
         }
     
         h1 {
@@ -157,6 +158,18 @@ font-size: 22px !important; /* Increase font size for buttons */
             font-weight: bold;
             /* white-space: nowrap; Prevent breaking of the span across lines */
         }
+
+
+.android .content li {
+    font-size: 20px !important;
+}
+
+.android button {
+    font-size: 20px !important;
+    padding: 15px 25px;
+}
+
+
     </style>
     
 </head>
