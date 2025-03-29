@@ -92,7 +92,7 @@
             flex-wrap: wrap; /* Allow wrapping */
             word-wrap: break-word; /* Allow breaking long words */
 
-font-size: 20px;
+font-size: 18px;
 
         }
     
@@ -106,10 +106,18 @@ font-size: 20px;
         @media (max-width: 768px) {
             .content ul {
                 gap: 15px;
+display: block; /* Ensure it renders as a block */
             }
             .highlight {
                 white-space: normal; /* Allow wrapping of the span on smaller screens */
             }
+
+.content li {
+font-size: 18px !important; /* Force font size */
+line-height: 1.6; /* Improve readability */
+}
+
+
         }
 
     
