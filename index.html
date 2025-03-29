@@ -13,7 +13,9 @@
             overflow-x: hidden; /* Prevent horizontal scroll */
             overflow-y: scroll; /* Always show vertical scrollbar */
             font-family: 'Roboto', sans-serif;
-            font-size: 16px; /* Base font size */
+
+font-size: 1rem; /* Default: 16px */
+
         }
     
         .background {
@@ -92,7 +94,9 @@
             align-items: center;
             flex-wrap: wrap; /* Allow wrapping */
             word-wrap: break-word; /* Allow breaking long words */
-            font-size: 18px; /* Larger font size for list items */
+
+font-size: 1.1rem; /* Slightly larger than body */
+
         }
     
         .content li::before {
@@ -108,30 +112,6 @@
             }
             .highlight {
                 white-space: normal; /* Allow wrapping of the span on smaller screens */
-            }
-            body, html {
-                font-size: 18px; /* Larger base font size for mobile */
-            }
-            .content li {
-                font-size: 18px; /* Ensure list items are readable on Android */
-            }
-            button {
-                font-size: 20px; /* Ensure buttons are readable on Android */
-            }
-        }
-        
-        /* Target Android specifically */
-        @supports (-webkit-appearance:none) and (not (overflow:-webkit-marquee)) and (not (-ms-ime-align:auto)) and (not (-moz-appearance:none)) {
-            @media screen and (max-width: 768px) {
-                body, html {
-                    font-size: 18px;
-                }
-                .content li {
-                    font-size: 18px;
-                }
-                button {
-                    font-size: 20px;
-                }
             }
         }
     
@@ -152,7 +132,7 @@
         }
     
         button {
-            font-size: 20px; /* Larger font size for buttons */
+            font-size: 18px;
             padding: 15px 25px;
             margin: 10px;
             border: none;
@@ -171,7 +151,6 @@
             color: orange;
             text-decoration: underline;
             font-weight: bold;
-            font-size: 18px; /* Ensure highlight text is readable */
             /* white-space: nowrap; Prevent breaking of the span across lines */
         }
     </style>
