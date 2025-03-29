@@ -147,6 +147,44 @@
             font-weight: bold;
             /* white-space: nowrap; Prevent breaking of the span across lines */
         }
+
+
+/* Target Android specifically with a media query */
+@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution:.001dpcm) and (max-width: 768px) {
+    /* Selector for Chrome/Android Browser */
+    .content li {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    button {
+        font-size: 20px;
+        padding: 16px 26px;
+    }
+    
+    .highlight {
+        font-size: 18px;
+    }
+}
+
+/* Alternative Android detection for some versions */
+@supports (-webkit-touch-callout: none) and (max-width: 768px) {
+    .content li {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    button {
+        font-size: 20px;
+        padding: 16px 26px;
+    }
+    
+    .highlight {
+        font-size: 18px;
+    }
+}
+
+
     </style>
     
 </head>
@@ -251,21 +289,4 @@
         </div>
     </div>
 </body>
-<footer>
-    <script>
-        // Check if the device is Android
-        if (/Android/i.test(navigator.userAgent)) {
-            document.addEventListener("DOMContentLoaded", function() {
-                // Adjust <li> and button font sizes for Android
-                const lis = document.querySelectorAll('.content li');
-                const buttons = document.querySelectorAll('button');
-    
-                // Apply the font size change to <li> and button
-                lis.forEach(li => li.style.fontSize = '20px');
-                buttons.forEach(button => button.style.fontSize = '20px');
-            });
-        }
-    </script>
-    
-</footer>
 </html>
