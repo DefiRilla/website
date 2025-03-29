@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- <meta name="robots" content="noindex, nofollow"> -->
     <title>DeFiRilla - Your Realtime Crypto DeFi Yield Wallet Monitoring Notifications</title>
     <style>
@@ -107,6 +107,38 @@
             .highlight {
                 white-space: normal; /* Allow wrapping of the span on smaller screens */
             }
+
+
+
+    /* Increase font size for list items */
+    .content li {
+        font-size: 18px !important; /* Use !important to override any other styles */
+        margin-bottom: 15px;
+    }
+    
+    /* Make the checkmark icon larger */
+    .content li::before {
+        font-size: 26px;
+    }
+    
+    /* Increase button size */
+    button {
+        font-size: 20px !important;
+        padding: 16px 26px;
+        min-height: 60px; /* Ensure minimum touchable height */
+    }
+    
+    /* Ensure highlight text is also larger */
+    .highlight {
+        font-size: 18px !important;
+    }
+    
+    /* Ensure paragraph text is large enough */
+    .box p, .box {
+        font-size: 16px !important;
+    }
+
+
         }
     
         h1 {
@@ -147,44 +179,6 @@
             font-weight: bold;
             /* white-space: nowrap; Prevent breaking of the span across lines */
         }
-
-
-/* Target Android specifically with a media query */
-@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution:.001dpcm) and (max-width: 768px) {
-    /* Selector for Chrome/Android Browser */
-    .content li {
-        font-size: 18px;
-        margin-bottom: 15px;
-    }
-    
-    button {
-        font-size: 20px;
-        padding: 16px 26px;
-    }
-    
-    .highlight {
-        font-size: 18px;
-    }
-}
-
-/* Alternative Android detection for some versions */
-@supports (-webkit-touch-callout: none) and (max-width: 768px) {
-    .content li {
-        font-size: 18px;
-        margin-bottom: 15px;
-    }
-    
-    button {
-        font-size: 20px;
-        padding: 16px 26px;
-    }
-    
-    .highlight {
-        font-size: 18px;
-    }
-}
-
-
     </style>
     
 </head>
