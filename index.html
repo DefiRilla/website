@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <meta name="robots" content="noindex, nofollow"> -->
     <title>DeFiRilla - Your Realtime Crypto DeFi Yield Wallet Monitoring Notifications</title>
     <style>
@@ -252,4 +251,21 @@
         </div>
     </div>
 </body>
+<footer>
+    <script>
+        // Check if the device is Android
+        if (/Android/i.test(navigator.userAgent)) {
+            document.addEventListener("DOMContentLoaded", function() {
+                // Adjust <li> and button font sizes for Android
+                const lis = document.querySelectorAll('.content li');
+                const buttons = document.querySelectorAll('button');
+    
+                // Apply the font size change to <li> and button
+                lis.forEach(li => li.style.fontSize = '20px');
+                buttons.forEach(button => button.style.fontSize = '20px');
+            });
+        }
+    </script>
+    
+</footer>
 </html>
