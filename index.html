@@ -13,6 +13,10 @@
             overflow-x: hidden; /* Prevent horizontal scroll */
             overflow-y: scroll; /* Always show vertical scrollbar */
             font-family: 'Roboto', sans-serif;
+
+-webkit-text-size-adjust: 100%;
+text-size-adjust: 100%;
+
         }
     
         .background {
@@ -91,9 +95,6 @@
             align-items: center;
             flex-wrap: wrap; /* Allow wrapping */
             word-wrap: break-word; /* Allow breaking long words */
-
-font-size: 4vw; /* Adjust for screen width */
-
         }
     
         .content li::before {
@@ -106,20 +107,11 @@ font-size: 4vw; /* Adjust for screen width */
         @media (max-width: 768px) {
             .content ul {
                 gap: 15px;
-display: block; /* Ensure it renders as a block */
             }
             .highlight {
                 white-space: normal; /* Allow wrapping of the span on smaller screens */
             }
-
-.content li {
-font-size: 18px !important; /* Force font size */
-line-height: 1.6; /* Improve readability */
-}
-
-
         }
-
     
         h1 {
             color: orange;
@@ -138,7 +130,7 @@ line-height: 1.6; /* Improve readability */
         }
     
         button {
-            font-size: 20px;
+            font-size: 18px;
             padding: 15px 25px;
             margin: 10px;
             border: none;
