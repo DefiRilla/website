@@ -147,10 +147,55 @@
             font-weight: bold;
             /* white-space: nowrap; Prevent breaking of the span across lines */
         }
+
+
+
+/* Orange diagonal banner */
+.diagonal-banner {
+        position: fixed;
+        top: 60px; /* Lowered from 20px to 40px */
+        right: -55px;
+        width: 270px;
+        height: 40px;
+        background-color: orange; /* Changed to match your website's orange */
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    font-size: 13px; /* Slightly smaller font to ensure text fits */
+    font-weight: bold;
+    transform: rotate(45deg);
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.diagonal-banner:hover {
+    background-color: #e68900; /* Darker orange for hover effect */
+    color: white;
+    text-decoration: none;
+}
+
+/* Ensure banner stays above other content */
+.diagonal-banner * {
+    color: white !important;
+}
+    
+
+
     </style>
     
 </head>
 <body>
+
+
+<!-- Orange diagonal banner -->
+<a href="https://x.com/swellnetworkio/status/1914253168554447087" target="_blank" class="diagonal-banner">
+As trusted by Swell Blockchain
+</a>
+
+
     <div class="background"></div>
     <div class="content">
         <div class="box">
