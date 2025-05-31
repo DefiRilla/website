@@ -6,159 +6,152 @@
     <meta name="robots" content="noindex, nofollow">
     <title>DeFiRilla - Your Realtime Crypto DeFi Yield Wallet Monitoring Notifications</title>
     <style>
+        
         body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow-x: hidden; /* Prevent horizontal scroll */
-            overflow-y: scroll; /* Always show vertical scrollbar */
-            font-family: 'Roboto', sans-serif;
-        }
-    
-        .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('defirilla.png');
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            animation: fadeIn 3s forwards;
-            z-index: -1;
-        }
-    
-        @keyframes fadeIn {
-            to {
-                opacity: 0.4;
-            }
-        }
-    
-        .content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 100%;
-            color: white;
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-            overflow: auto;
-        }
-    
-        .box {
-            background-color: rgba(0, 0, 0, 0.4);
-            padding: 40px;
-            border-radius: 10px;
-            text-align: left;
-            max-width: 100%;
-            width: 1000px;
-            height: 80vh;
-            overflow-y: auto;
-        }
-    
-        iframe {
-            width: 100%;
-            height: 700px;
-            border: none;
-            display: block;
-            margin-bottom: 20px;
-        }
-    
-        .content a {
-            color: white;
-        }
-    
-        .content a:hover {
-            color: grey;
-        }
-    
-        .content ul {
-            padding: 0;
-            list-style-type: none;
-            display: flex;
-            justify-content: left;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-    
-        .content li {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap; /* Allow wrapping */
-            word-wrap: break-word; /* Allow breaking long words */
-        }
-    
-        .content li::before {
-            content: "\2713";
-            color: white;
-            font-size: 24px;
-            margin-right: 10px;
-        }
-    
-        @media (max-width: 768px) {
-            .content ul {
-                gap: 15px;
-            }
-            .highlight {
-                white-space: normal; /* Allow wrapping of the span on smaller screens */
-            }
-        }
-    
-        h1 {
-            color: orange;
-            text-align: center;
-        }
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-y: scroll; /* Always show vertical scrollbar */
+    font-family: 'Roboto', sans-serif;
+}
 
-        h2 {
-            text-align: center;
-        }
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('defirilla.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    animation: fadeIn 3s forwards;
+    z-index: -1;
+}
 
-        #iframe-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Center buttons horizontally */
-            text-align: center;
-        }
-    
-        button {
-            font-size: 18px;
-            padding: 15px 25px;
-            margin: 10px;
-            border: none;
-            border-radius: 8px;
-            background-color: #007BFF;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-    
-        button:hover {
-            background-color: #0056b3;
-        }
-    
-        .highlight {
-            color: orange;
-            text-decoration: underline;
-            font-weight: bold;
-            /* white-space: nowrap; Prevent breaking of the span across lines */
-        }
+@keyframes fadeIn {
+    to {
+        opacity: 0.4;
+    }
+}
 
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    color: white;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: auto;
+}
 
+.box {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 40px;
+    border-radius: 10px;
+    text-align: left;
+    max-width: 100%;
+    width: 1000px;
+    height: 80vh;
+    overflow-y: auto;
+}
 
+iframe {
+    width: 100%;
+    height: 700px;
+    border: none;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.content a {
+    color: white;
+}
+
+.content a:hover {
+    color: grey;
+}
+
+.content ul {
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    justify-content: left;
+    gap: 30px;
+    flex-wrap: wrap;
+    flex-direction: column; /* Add this to stack items vertically */
+}
+
+.content li {
+    display: block; /* Change back to block */
+    position: relative;
+    padding-left: 35px; /* Space for checkmark */
+    line-height: 1.4;
+    margin-bottom: 15px; /* Space between items */
+    word-wrap: break-word;
+}
+
+.content li::before {
+    content: "\2713";
+    color: white;
+    font-size: 24px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+h1 {
+    color: orange;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+#iframe-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center buttons horizontally */
+    text-align: center;
+}
+
+button {
+    font-size: 18px;
+    padding: 15px 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.highlight {
+    color: orange;
+    text-decoration: underline;
+    font-weight: bold;
+}
 
 /* Orange diagonal banner */
 .diagonal-banner {
-        position: fixed;
-        top: 60px; /* Lowered from 20px to 40px */
-        right: -55px;
-        width: 270px;
-        height: 40px;
-        background-color: orange; /* Changed to match your website's orange */
+    position: fixed;
+    top: 60px; /* Lowered from 20px to 40px */
+    right: -55px;
+    width: 270px;
+    height: 40px;
+    background-color: orange; /* Changed to match your website's orange */
     color: white;
     text-align: center;
     line-height: 40px;
@@ -182,7 +175,6 @@
 .diagonal-banner * {
     color: white !important;
 }
-
 
     </style>
     
@@ -210,7 +202,7 @@ Trusted by Swell Blockchain
 
             <ul>
                 <li>
-                    Set & forget in 18 seconds: just&nbsp;<em class="highlight">PASTE</em>&nbsp;a public wallet address&nbsp;=>&nbsp;<b>no security risk</b>&nbsp;as no need to connect your wallet or sign anything
+                    Set & forget in 18 seconds: just&nbsp;<em class="highlight">PASTE</em>&nbsp;a public wallet addres sand you're done&nbsp;=>&nbsp;<b>no security risk</b>&nbsp;as no need to connect your wallet or sign anything
                 </li>
                 <li>
                     <em class="highlight">Remain anonymous</em>&nbsp;via email (instead of Telegram) alerts using any free third party email relay service (instructions provided)&nbsp;=>&nbsp;<b>no way to link your real email to your wallet</b>
