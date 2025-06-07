@@ -6,180 +6,337 @@
     <meta name="robots" content="noindex, nofollow">
     <title>DeFiRilla - Your Realtime Crypto DeFi Yield Wallet Monitoring Notifications</title>
     <style>
+
+        /* Navigation Bar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(20, 20, 20, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 999;
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 165, 0, 0.2);
+        }
+        
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            padding-right: 180px; /* Space for banner */
+        }
+        
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: bold;
+            color: orange;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+        
+        .navbar-brand:hover {
+            color: #FFA500;
+        }
+        
+        .navbar-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 30px;
+        }
+        
+        .navbar-menu li {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .navbar-menu li::before {
+            display: none;
+        }
+        
+        .navbar-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-menu a:hover {
+            color: orange;
+            background-color: rgba(255, 165, 0, 0.1);
+        }
+        
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        
+        /* Nav Mobile Responsive */
+        @media (max-width: 1060px) {
+            .navbar-container {
+                padding-right: 20px;
+            }
+            
+            .navbar-menu {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(20, 20, 20, 0.98) 100%);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 50px;
+                transition: left 0.3s ease;
+                gap: 20px;
+            }
+        
+            .navbar-menu.active {
+                left: 0;
+            }
+        
+            .navbar-menu a {
+                font-size: 18px;
+                padding: 15px 20px;
+                width: 80%;
+                text-align: center;
+                box-sizing: border-box;
+            }
+        
+            .menu-toggle {
+                display: flex;
+            }
+        
+            .navbar-brand {
+                font-size: 24px;
+            }
+        }
+        
+        /* Nav Smooth scrolling and scroll offset fixes */
+        html {
+            scroll-behavior: smooth;
+        }
         
         body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow-x: hidden; /* Prevent horizontal scroll */
-    overflow-y: scroll; /* Always show vertical scrollbar */
-    font-family: 'Roboto', sans-serif;
-}
-
-.background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('defirilla.png');
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    animation: fadeIn 3s forwards;
-    z-index: -1;
-}
-
-@keyframes fadeIn {
-    to {
-        opacity: 0.4;
-    }
-}
-
-.content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
-    color: white;
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow: auto;
-}
-
-.box {
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 40px;
-    border-radius: 10px;
-    text-align: left;
-    max-width: 100%;
-    width: 1000px;
-    height: 80vh;
-    overflow-y: auto;
-}
-
-iframe {
-    width: 100%;
-    height: 700px;
-    border: none;
-    display: block;
-    margin-bottom: 20px;
-}
-
-.content a {
-    color: white;
-}
-
-.content a:hover {
-    color: grey;
-}
-
-.content ul {
-    padding: 0;
-    list-style-type: none;
-    display: flex;
-    justify-content: left;
-    gap: 30px;
-    flex-wrap: wrap;
-    flex-direction: column; /* Add this to stack items vertically */
-}
-
-.content li {
-    display: block; /* Change back to block */
-    position: relative;
-    padding-left: 35px; /* Space for checkmark */
-    line-height: 1.4;
-    margin-bottom: 15px; /* Space between items */
-    word-wrap: break-word;
-}
-
-.content li::before {
-    content: "\2713";
-    color: white;
-    font-size: 24px;
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-
-h1 {
-    color: orange;
-    text-align: center;
-}
-
-h2 {
-    text-align: center;
-}
-
-#iframe-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center buttons horizontally */
-    text-align: center;
-}
-
-button {
-    font-size: 18px;
-    padding: 15px 25px;
-    margin: 10px;
-    border: none;
-    border-radius: 8px;
-    background-color: #007BFF;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.highlight {
-    color: orange;
-    text-decoration: underline;
-    font-weight: bold;
-}
-
-/* Orange diagonal banner */
-.diagonal-banner {
-    position: fixed;
-    top: 60px; /* Lowered from 20px to 40px */
-    right: -55px;
-    width: 270px;
-    height: 40px;
-    background-color: orange; /* Changed to match your website's orange */
-    color: white;
-    text-align: center;
-    line-height: 40px;
-    font-size: 15px; /* Slightly smaller font to ensure text fits */
-    font-weight: bold;
-    transform: rotate(45deg);
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    text-decoration: none;
-    display: block;
-    transition: background-color 0.3s ease;
-}
-
-.diagonal-banner:hover {
-    background-color: #e68900; /* Darker orange for hover effect */
-    color: white;
-    text-decoration: none;
-}
-
-/* Ensure banner stays above other content */
-.diagonal-banner * {
-    color: white !important;
-}
-
-    </style>
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-y: scroll; /* Always show vertical scrollbar */
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        body {
+            padding-top: 80px;
+        }
+        
+        /* Nav Fix for scroll offset to account for fixed navbar */
+        h1[id], h2[id], iframe[id] {
+            scroll-margin-top: 100px;
+        }
+        
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('defirilla.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: fadeIn 3s forwards;
+            z-index: -1;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 0.4;
+            }
+        }
+        
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+            color: white;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+        
+        .box {
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: left;
+            max-width: 100%;
+            width: 1000px;
+            height: 80vh;
+            overflow-y: auto;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 700px;
+            border: none;
+            display: block;
+            margin-bottom: 20px;
+        }
+        
+        .content a {
+            color: white;
+        }
+        
+        .content a:hover {
+            color: grey;
+        }
+        
+        .content ul {
+            padding: 0;
+            list-style-type: none;
+            display: flex;
+            justify-content: left;
+            gap: 30px;
+            flex-wrap: wrap;
+            flex-direction: column; /* Add this to stack items vertically */
+        }
+        
+        .content li {
+            display: block; /* Change back to block */
+            position: relative;
+            padding-left: 35px; /* Space for checkmark */
+            line-height: 1.4;
+            margin-bottom: 15px; /* Space between items */
+            word-wrap: break-word;
+        }
+        
+        .content li::before {
+            content: "\2713";
+            color: white;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        h1 {
+            color: orange;
+            text-align: center;
+        }
+        
+        h2 {
+            text-align: center;
+        }
+        
+        #iframe-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center buttons horizontally */
+            text-align: center;
+        }
+        
+        button {
+            font-size: 18px;
+            padding: 15px 25px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        .highlight {
+            color: orange;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        
+        /* Orange diagonal banner */
+        .diagonal-banner {
+            position: fixed;
+            top: 60px; /* Lowered from 20px to 40px */
+            right: -55px;
+            width: 270px;
+            height: 40px;
+            background-color: orange; /* Changed to match your website's orange */
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            font-size: 15px; /* Slightly smaller font to ensure text fits */
+            font-weight: bold;
+            transform: rotate(45deg);
+            z-index: 999;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+        
+        .diagonal-banner:hover {
+            background-color: #e68900; /* Darker orange for hover effect */
+            color: white;
+            text-decoration: none;
+        }
+        
+            </style>
     
 </head>
 <body>
+
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <a href="#top" class="navbar-brand">DeFiRilla</a>
+        <ul class="navbar-menu" id="navbar-menu">
+            <li><a href="#demo">Demo</a></li>
+            <li><a href="#request">Monitor your wallet's DeFi</a></li>
+            <li><a href="#alerts">Example alerts</a></li>
+            <li><a href="#motivation">Motivation</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
 
 
 <!-- Orange diagonal banner -->
@@ -245,7 +402,7 @@ Trusted by Swell Blockchain
 
 <br/><br/><hr/><br/>
 
-<h1>Paste a wallet address for its DeFi Telegram notifications in 18s</h1>
+<h1 id="demo">Paste a wallet address for its DeFi Telegram notifications in 18s</h1>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/WVWG0BD95a4" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -254,6 +411,8 @@ allowfullscreen></iframe>
 
             <br/><br><br/><hr/><br/>
 
+
+<!--
             <h2>What this landing page is for</h2>
 
             <br/>
@@ -268,17 +427,16 @@ allowfullscreen></iframe>
             This landing page is <b>only</b> designed to:
             <ul>
                 <ol>1) list the types of <b>DeFi yield wallet monitoring notifications</b></ol>
-                <br/>
                 <ol>2) show <b>examples of <a href=#alerts>real alerts</a></b> just sent to other experts</b></ol>
-                <br/>
                 <ol>3) allow you to automatically <b>monitor via alerts all your wallet's DeFi yield positions by either email or telegram</b><br/>(just paste your <b>public wallet address</b> and for <b>free</b>)</ol>
             </ul>
 
 
             <br/><br/><hr/><br/>
+-->
+            
 
-
-            <h1>Instant setup of DeFi monitoring alerts on your wallet</h1>
+            <h1 id="request">Instant setup of DeFi monitoring alerts on your wallet</h1>
 
             It takes 18 seconds to <b>paste your public wallet address to start monitoring ALL your own/anyone's* wallet's DeFi positions</b> via Telegram or email notifications (instructions are given how to optionally use a free 100% anonymous email relay service so <b>your wallet cannot be linked to your email</b>)
 
@@ -308,7 +466,7 @@ allowfullscreen></iframe>
             <br/><br/><hr/><br/>
 
 
-            <h2>Motivation</h2>
+            <h2 id="motivation">Motivation</h2>
 
             I started this personal project three years ago after getting badly liquidated and my remaining crypto was returned to me converted into stable coins.
             
@@ -338,9 +496,41 @@ allowfullscreen></iframe>
             
             <br/><br/><b>I appreciate you being early and also your time, patience and expertise</b>.
 
-            <br/><br/><br/>support {AT} defirilla.com | <a href="https://discord.com/invite/kfzVSUffDA" target="_blank">Discord</a> | X (Twitter) public alerts are not representative of private alerts: <a href="https://x.com/@DefiRilla" target="_blank">@DefiRilla</a> | NFA. DYOR.
+            <br/><br/><hr/><br/>
+
+            <h2 id="contact">Contact</h2>
+
+            support {AT} defirilla.com | <a href="https://discord.com/invite/kfzVSUffDA" target="_blank">Discord</a> | X (Twitter) public alerts are not representative of private alerts <a href="https://x.com/@DefiRilla" target="_blank">@DefiRilla</a> | NFA. DYOR.
 
         </div>
     </div>
+
+
+<script>
+// Nav Mobile menu toggle
+document.getElementById('menu-toggle').addEventListener('click', function() {
+    const menu = document.getElementById('navbar-menu');
+    menu.classList.toggle('active');
+});
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.navbar-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('navbar-menu').classList.remove('active');
+    });
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(event) {
+    const menu = document.getElementById('navbar-menu');
+    const toggle = document.getElementById('menu-toggle');
+    
+    if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+        menu.classList.remove('active');
+    }
+});
+</script>
+
+
 </body>
 </html>
