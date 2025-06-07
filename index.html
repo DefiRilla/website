@@ -7,6 +7,159 @@
     <title>DeFiRilla - Your Realtime Crypto DeFi Yield Wallet Monitoring Notifications</title>
     <style>
 
+/* Navigation Bar Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(20, 20, 20, 0.95) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 999;
+    padding: 15px 0;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 165, 0, 0.2);
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px 0 20px;
+    /* Add more right padding to avoid banner overlap */
+    padding-right: 180px;
+}
+
+.navbar-brand {
+    font-size: 28px;
+    font-weight: bold;
+    color: orange; /* Changed to match your existing orange */
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+    color: #FFA500;
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 30px;
+}
+
+.navbar-menu li {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-menu li::before {
+    display: none;
+}
+
+.navbar-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.navbar-menu a:hover {
+    color: orange; /* Changed to match your existing orange */
+    background-color: rgba(255, 165, 0, 0.1);
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Mobile Responsive */
+@media (max-width: 1060px) {
+    .navbar-container {
+        padding-right: 20px; /* Reset padding on mobile */
+    }
+    
+    .navbar-menu {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(20, 20, 20, 0.98) 100%);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 50px;
+        transition: left 0.3s ease;
+        gap: 20px;
+    }
+
+    .navbar-menu.active {
+        left: 0;
+    }
+
+    .navbar-menu a {
+        font-size: 18px;
+        padding: 15px 20px;
+        width: 80%;
+        text-align: center;
+        box-sizing: border-box; /* Fix for alignment */
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .navbar-brand {
+        font-size: 24px;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Add padding to account for fixed navbar */
+body {
+    padding-top: 80px;
+}
+
+/* Fix for scroll offset to account for fixed navbar */
+h1[id], h2[id], iframe[id] {
+    scroll-margin-top: 50px; /* Adjust this value based on your navbar height */
+}
+
+/* Alternative method - add invisible pseudo-elements */
+#overview::before, #demo::before, #request::before, #alerts::before, #motivation::before, #contact::before {
+    content: "";
+    display: block;
+    height: 100px; /* Same as navbar height + some padding */
+    margin-top: -100px;
+    visibility: hidden;
+}
 
 body, html {
     margin: 0;
@@ -15,6 +168,10 @@ body, html {
     overflow-x: hidden; /* Prevent horizontal scroll */
     overflow-y: scroll; /* Always show vertical scrollbar */
     font-family: 'Roboto', sans-serif;
+}
+
+body {
+    padding-top: 80px; /* Account for fixed navbar */
 }
 
 .background {
@@ -159,7 +316,7 @@ button:hover {
     font-size: 15px; /* Slightly smaller font to ensure text fits */
     font-weight: bold;
     transform: rotate(45deg);
-    z-index: 1000;
+    z-index: 999; /* Higher than navbar */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     text-decoration: none;
     display: block;
@@ -186,6 +343,24 @@ button:hover {
 </head>
 <body>
 
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <a href="#top" class="navbar-brand">DeFiRilla</a>
+        <ul class="navbar-menu" id="navbar-menu">
+            <li><a href="#demo">Demo</a></li>
+            <li><a href="#request">Monitor your wallet's DeFi</a></li>
+            <li><a href="#alerts">Example alerts</a></li>
+            <li><a href="#motivation">Motivation</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
 
 <!-- Orange diagonal banner -->
 <a href="https://x.com/swellnetworkio/status/1914253168554447087" target="_blank" class="diagonal-banner">
@@ -197,7 +372,7 @@ Trusted by Swell Blockchain
     <div class="content">
         <div class="box">
    
-            <h1>DeFi Wallet Health & Yield Monitoring Notification Alerts</h1>
+            <h1 id="overview">DeFi Wallet Health & Yield Monitoring Notification Alerts</h1>
 
             <br/>
 
@@ -245,7 +420,7 @@ Trusted by Swell Blockchain
 
 <br/><br/><hr/><br/>
 
-<h1>Paste a wallet address for its DeFi Telegram notifications in 18s</h1>
+<h1 id="demo">Paste a wallet address for its DeFi Telegram notifications in 18s</h1>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/WVWG0BD95a4" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -256,7 +431,7 @@ allowfullscreen></iframe>
             <br/><br/><hr/><br/>
 
 
-            <h1>Request DeFi monitoring alerts on your wallet</h1>
+            <h1 id="request">Request DeFi monitoring alerts on your wallet</h1>
 
             It takes a few seconds to join the waitlist to <b>paste your own/anyone's* wallet and monitor ALL the wallet's DeFi positions</b> via Telegram or email notifications (instructions are given how to optionally use a free 100% anonymous email relay service so <b>your wallet cannot be linked to your email</b>)
 
@@ -281,7 +456,7 @@ allowfullscreen></iframe>
             <br/><br/><hr/><br/>
 
 
-            <h2>Motivation</h2>
+            <h2 id="motivation">Motivation</h2>
 
             I started this personal project three years ago after getting badly liquidated and my remaining crypto was returned to me converted into stable coins.
             
@@ -311,9 +486,40 @@ allowfullscreen></iframe>
             
             <br/><br/><b>I appreciate you being early and also your time, patience and expertise</b>.
 
-            <br/><br/><br/>support {AT} defirilla.com | <a href="https://discord.com/invite/kfzVSUffDA" target="_blank">Discord</a> | X (Twitter) public alerts are not representative of private alerts: <a href="https://x.com/@DefiRilla" target="_blank">@DefiRilla</a> | NFA. DYOR.
+
+            <br/><br/><hr/><br/>
+
+            <h2 id="contact">Contact</h2>
+
+            support {AT} defirilla.com | <a href="https://discord.com/invite/kfzVSUffDA" target="_blank">Discord</a> | X (Twitter) public alerts are not representative of private alerts: <a href="https://x.com/@DefiRilla" target="_blank">@DefiRilla</a> | NFA. DYOR.
 
         </div>
     </div>
+
+<script>
+// Mobile menu toggle
+document.getElementById('menu-toggle').addEventListener('click', function() {
+    const menu = document.getElementById('navbar-menu');
+    menu.classList.toggle('active');
+});
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.navbar-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('navbar-menu').classList.remove('active');
+    });
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(event) {
+    const menu = document.getElementById('navbar-menu');
+    const toggle = document.getElementById('menu-toggle');
+    
+    if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+        menu.classList.remove('active');
+    }
+});
+</script>
+
 </body>
 </html>
