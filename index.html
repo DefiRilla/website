@@ -28,15 +28,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px 0 20px;
-    /* Add more right padding to avoid banner overlap */
-    padding-right: 180px;
+    padding: 0 20px;
+    padding-right: 180px; /* Space for banner */
 }
 
 .navbar-brand {
     font-size: 28px;
     font-weight: bold;
-    color: orange; /* Changed to match your existing orange */
+    color: orange;
     text-decoration: none;
     letter-spacing: 1px;
     transition: color 0.3s ease;
@@ -71,11 +70,10 @@
     padding: 10px 15px;
     border-radius: 5px;
     transition: all 0.3s ease;
-    position: relative;
 }
 
 .navbar-menu a:hover {
-    color: orange; /* Changed to match your existing orange */
+    color: orange;
     background-color: rgba(255, 165, 0, 0.1);
 }
 
@@ -95,10 +93,10 @@
     transition: 0.3s;
 }
 
-/* Mobile Responsive */
+/* Nav Mobile Responsive */
 @media (max-width: 1060px) {
     .navbar-container {
-        padding-right: 20px; /* Reset padding on mobile */
+        padding-right: 20px;
     }
     
     .navbar-menu {
@@ -125,7 +123,7 @@
         padding: 15px 20px;
         width: 80%;
         text-align: center;
-        box-sizing: border-box; /* Fix for alignment */
+        box-sizing: border-box;
     }
 
     .menu-toggle {
@@ -137,28 +135,9 @@
     }
 }
 
-/* Smooth scrolling */
+/* Nav Smooth scrolling and scroll offset fixes */
 html {
     scroll-behavior: smooth;
-}
-
-/* Add padding to account for fixed navbar */
-body {
-    padding-top: 80px;
-}
-
-/* Fix for scroll offset to account for fixed navbar */
-h1[id], h2[id], iframe[id] {
-    scroll-margin-top: 50px; /* Adjust this value based on your navbar height */
-}
-
-/* Alternative method - add invisible pseudo-elements */
-#overview::before, #demo::before, #request::before, #alerts::before, #motivation::before, #contact::before {
-    content: "";
-    display: block;
-    height: 100px; /* Same as navbar height + some padding */
-    margin-top: -100px;
-    visibility: hidden;
 }
 
 body, html {
@@ -171,7 +150,12 @@ body, html {
 }
 
 body {
-    padding-top: 80px; /* Account for fixed navbar */
+    padding-top: 80px;
+}
+
+/* Nav Fix for scroll offset to account for fixed navbar */
+h1[id], h2[id], iframe[id] {
+    scroll-margin-top: 100px;
 }
 
 .background {
@@ -316,7 +300,7 @@ button:hover {
     font-size: 15px; /* Slightly smaller font to ensure text fits */
     font-weight: bold;
     transform: rotate(45deg);
-    z-index: 999; /* Higher than navbar */
+    z-index: 999;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     text-decoration: none;
     display: block;
@@ -328,15 +312,6 @@ button:hover {
     color: white;
     text-decoration: none;
 }
-
-/* Ensure banner stays above other content */
-.diagonal-banner * {
-    color: white !important;
-}
-    
-
-
-
 
     </style>
     
@@ -368,28 +343,28 @@ Trusted by Swell Blockchain
 </a>
 
 
-    <div class="background"></div>
+<div class="background"></div>
     <div class="content">
         <div class="box">
    
-            <h1 id="overview">DeFi Wallet Health & Yield Monitoring Notification Alerts</h1>
+            <h1>DeFi Wallet Health & Yield Monitoring Notification Alerts</h1>
 
             <br/>
 
-            <h2>Paste your wallet address for auto alerting on <b>ALL</b> your wallet's DeFi positions:</h2>
+        <h2>Paste your wallet address for auto alerting on <b>ALL</b> your wallet's DeFi positions:</h2>
 
-            <br/>
+        <br/>
 
-            <ul>
-                <li>
-                    Set & forget in 18 seconds: just&nbsp;<em class="highlight">PASTE</em>&nbsp;a public wallet address and you're done&nbsp;=>&nbsp;<b>no security risk</b>&nbsp;as no need to connect your wallet or sign anything
-                </li>
-                <li>
-                    <em class="highlight">Remain anonymous</em>&nbsp;via email (instead of Telegram) alerts using any free third party email relay service (instructions provided)&nbsp;=>&nbsp;<b>no way to link your real email to your wallet</b>
-                </li>
-                <li>
-                    Auto discovers&nbsp;<em class="highlight">ALL your wallet's DeFi protocol sites</em>&nbsp;(including newly launched protocols) &&nbsp;<em class="highlight">ALL your wallet's coins</em>&nbsp;across &nbsp;<em class="highlight">ALL EVM blockchains</em>&nbsp;=>&nbsp;<b>no need to keep 10 tabs open</b>
-                </li>
+        <ul>
+            <li>
+                Set & forget in 18 seconds: just&nbsp;<em class="highlight">PASTE</em>&nbsp;a public wallet address and you're done&nbsp;=>&nbsp;<b>no security risk</b>&nbsp;as no need to connect your wallet or sign anything
+            </li>
+            <li>
+                <em class="highlight">Remain anonymous</em>&nbsp;via email (instead of Telegram) alerts using any free third party email relay service (instructions provided)&nbsp;=>&nbsp;<b>no way to link your real email to your wallet</b>
+            </li>
+            <li>
+                Auto discovers&nbsp;<em class="highlight">ALL your wallet's DeFi protocol sites</em>&nbsp;(including newly launched protocols) &&nbsp;<em class="highlight">ALL your wallet's coins</em>&nbsp;across &nbsp;<em class="highlight">ALL EVM blockchains</em>&nbsp;=>&nbsp;<b>no need to keep 10 tabs open</b>
+            </li>
                 <li>
                     Know your actual calculated&nbsp;<em class="highlight">current yield borrow/supply/reward APRs</em>&nbsp;=> ensure you are always&nbsp;<b>beating the market</b>
                     <!-- makes and saves people money -->
@@ -420,22 +395,21 @@ Trusted by Swell Blockchain
 
 <br/><br/><hr/><br/>
 
-<h1 id="demo">Paste a wallet address for its DeFi Telegram notifications in 18s</h1>
+        <h1 id="demo">Paste a wallet address for its DeFi Telegram notifications in 18s</h1>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/WVWG0BD95a4" 
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/WVWG0BD95a4" 
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
 allowfullscreen></iframe>
             
 
 
-            <br/><br/><hr/><br/>
+        <br/><br/><hr/><br/>
 
+        <h1 id="request">Request DeFi monitoring alerts on your wallet</h1>
 
-            <h1 id="request">Request DeFi monitoring alerts on your wallet</h1>
+        It takes a few seconds to join the waitlist to <b>paste your own/anyone's* wallet and monitor ALL the wallet's DeFi positions</b> via Telegram or email notifications (instructions are given how to optionally use a free 100% anonymous email relay service so <b>your wallet cannot be linked to your email</b>)
 
-            It takes a few seconds to join the waitlist to <b>paste your own/anyone's* wallet and monitor ALL the wallet's DeFi positions</b> via Telegram or email notifications (instructions are given how to optionally use a free 100% anonymous email relay service so <b>your wallet cannot be linked to your email</b>)
-
-            <br/><br/><small>Please only request alerts on your main best wallet with most DeFi yield positions each of at least $50 as our servers cannot scale at this time</small>
+        <br/><br/><small>Please only request alerts on your main best wallet with most DeFi yield positions each of at least $50 as our servers cannot scale at this time</small>
 
             <br/><br/>
 
@@ -451,53 +425,51 @@ allowfullscreen></iframe>
 
             <br/><br/><br/><hr/><br/>
 
-            <iframe id="alerts" src="https://DeFir-330f01ac30a4.herokuapp.com/most_recent_alerts.html" frameborder="0" style="width: 100%; height: 500px; border: none;">Loading...</iframe>
+        <iframe id="alerts" src="https://DeFir-330f01ac30a4.herokuapp.com/most_recent_alerts.html" frameborder="0" style="width: 100%; height: 500px; border: none;">Loading...</iframe>
 
-            <br/><br/><hr/><br/>
+        <br/><br/><hr/><br/>
 
+        <h2 id="motivation">Motivation</h2>
 
-            <h2 id="motivation">Motivation</h2>
+        I started this personal project three years ago after getting badly liquidated and my remaining crypto was returned to me converted into stable coins.
+        
+        <br/><br/>I did not notice for weeks.
 
-            I started this personal project three years ago after getting badly liquidated and my remaining crypto was returned to me converted into stable coins.
-            
-            <br/><br/>I did not notice for weeks.
+        <br/><br/>Unfortunately, when I did notice the crypto market had pumped considerably, and I was only able to convert the returned stable coins into a tiny fraction of my original crypto.
 
-            <br/><br/>Unfortunately, when I did notice the crypto market had pumped considerably, and I was only able to convert the returned stable coins into a tiny fraction of my original crypto.
+        <br/><br/>Like almost all DeFi sites, they had no kind of monitoring or alerting system I could have set up.
 
-            <br/><br/>Like almost all DeFi sites, they had no kind of monitoring or alerting system I could have set up.
+        <br/><br/>The final straw was when Aave removed their health notification system, I knew I had to find a DeFi monitoring solution.
 
-            <br/><br/>The final straw was when Aave removed their health notification system, I knew I had to find a DeFi monitoring solution.
+        <br/><br/>I tried every existing "monitoring" and "alert" system but none provided the health factor alerts I required across ALL DeFi yield protocols.
 
-            <br/><br/>I tried every existing "monitoring" and "alert" system but none provided the health factor alerts I required across ALL DeFi yield protocols.
+        <br/><br/>So I set out on a personal project to build realtime notification alerts for myself.
 
-            <br/><br/>So I set out on a personal project to build realtime notification alerts for myself.
+        <br/><br/>It turned out to be much more complicated than I anticipated to autodetect and support all DeFi sites across all EVM chains and provide realtime alerts on their health factors.
 
-            <br/><br/>It turned out to be much more complicated than I anticipated to autodetect and support all DeFi sites across all EVM chains and provide realtime alerts on their health factors.
+        <br/><br/>But I finally managed it.
+        
+        <br/><br/>It was then relatively trivial to add a whole range of different alerts which save me time and effort including real reward, borrow & supply APRs, when my DeFi limit orders hit, and more recently alerts when my LPs exit range.
 
-            <br/><br/>But I finally managed it.
-            
-            <br/><br/>It was then relatively trivial to add a whole range of different alerts which save me time and effort including real reward, borrow & supply APRs, when my DeFi limit orders hit, and more recently alerts when my LPs exit range.
+        <br/><br/>When describing the platform to my non crypto mentors, as there is nothing like it, they recommend I seek feedback from other crypto DeFi yield experts if it also adds value to them and is worth developing into a Startup.
 
-            <br/><br/>When describing the platform to my non crypto mentors, as there is nothing like it, they recommend I seek feedback from other crypto DeFi yield experts if it also adds value to them and is worth developing into a Startup.
+        <br/><br/>And here we are today.
+        
+        <br/><br/>I am currently working on it full time to keep it up, resolve bugs and implement requested features.
+        
+        <br/><br/><b>I appreciate you being early and also your time, patience and expertise</b>.
 
-            <br/><br/>And here we are today.
-            
-            <br/><br/>I am currently working on it full time to keep it up, resolve bugs and implement requested features.
-            
-            <br/><br/><b>I appreciate you being early and also your time, patience and expertise</b>.
+        <br/><br/><hr/><br/>
 
+        <h2 id="contact">Contact</h2>
 
-            <br/><br/><hr/><br/>
+        support {AT} defirilla.com | <a href="https://discord.com/invite/kfzVSUffDA" target="_blank">Discord</a> | X (Twitter) public alerts are not representative of private alerts <a href="https://x.com/@DefiRilla" target="_blank">@DefiRilla</a> | NFA. DYOR.
 
-            <h2 id="contact">Contact</h2>
-
-            support {AT} defirilla.com | <a href="https://discord.com/invite/kfzVSUffDA" target="_blank">Discord</a> | X (Twitter) public alerts are not representative of private alerts: <a href="https://x.com/@DefiRilla" target="_blank">@DefiRilla</a> | NFA. DYOR.
-
-        </div>
     </div>
+</div>
 
 <script>
-// Mobile menu toggle
+// Nav Mobile menu toggle
 document.getElementById('menu-toggle').addEventListener('click', function() {
     const menu = document.getElementById('navbar-menu');
     menu.classList.toggle('active');
