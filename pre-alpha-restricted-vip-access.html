@@ -3,332 +3,369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
+    <!-- <meta name="robots" content="noindex, nofollow"> -->
     <title>DeFiRilla - Your Realtime Crypto DeFi Yield Wallet Monitoring Notifications</title>
     <style>
+/* Navigation Bar Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(20, 20, 20, 0.95) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 999;
+    padding: 15px 0;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 165, 0, 0.2);
+}
 
-        /* Navigation Bar Styles */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(20, 20, 20, 0.95) 100%);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            z-index: 999;
-            padding: 15px 0;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-            border-bottom: 1px solid rgba(255, 165, 0, 0.2);
-        }
-        
-        .navbar-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            padding-right: 180px; /* Space for banner */
-        }
-        
-        .navbar-brand {
-            font-size: 28px;
-            font-weight: bold;
-            color: orange;
-            text-decoration: none;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
-        }
-        
-        .navbar-brand:hover {
-            color: #FFA500;
-        }
-        
-        .navbar-menu {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            gap: 30px;
-        }
-        
-        .navbar-menu li {
-            margin: 0;
-            padding: 0;
-        }
-        
-        .navbar-menu li::before {
-            display: none;
-        }
-        
-        .navbar-menu a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        .navbar-menu a:hover {
-            color: orange;
-            background-color: rgba(255, 165, 0, 0.1);
-        }
-        
-        /* Mobile Menu Toggle */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            padding: 5px;
-        }
-        
-        .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background-color: white;
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-        
-        /* Nav Mobile Responsive */
-        @media (max-width: 1060px) {
-            .navbar-container {
-                padding-right: 20px;
-            }
-            
-            .navbar-menu {
-                position: fixed;
-                top: 60px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(20, 20, 20, 0.98) 100%);
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
-                padding-top: 50px;
-                transition: left 0.3s ease;
-                gap: 20px;
-            }
-        
-            .navbar-menu.active {
-                left: 0;
-            }
-        
-            .navbar-menu a {
-                font-size: 18px;
-                padding: 15px 20px;
-                width: 80%;
-                text-align: center;
-                box-sizing: border-box;
-            }
-        
-            .menu-toggle {
-                display: flex;
-            }
-        
-            .navbar-brand {
-                font-size: 24px;
-            }
-        }
-        
-        /* Nav Smooth scrolling and scroll offset fixes */
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow-x: hidden; /* Prevent horizontal scroll */
-            overflow-y: scroll; /* Always show vertical scrollbar */
-            font-family: 'Roboto', sans-serif;
-        }
-        
-        body {
-            padding-top: 80px;
-        }
-        
-        /* Nav Fix for scroll offset to account for fixed navbar */
-        h1[id], h2[id], iframe[id] {
-            scroll-margin-top: 100px;
-        }
-        
-        .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('defirilla.png');
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            animation: fadeIn 3s forwards;
-            z-index: -1;
-        }
-        
-        @keyframes fadeIn {
-            to {
-                opacity: 0.4;
-            }
-        }
-        
-        .content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 100%;
-            color: white;
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-            overflow: auto;
-        }
-        
-        .box {
-            background-color: rgba(0, 0, 0, 0.4);
-            padding: 40px;
-            border-radius: 10px;
-            text-align: left;
-            max-width: 100%;
-            width: 1000px;
-            height: 80vh;
-            overflow-y: auto;
-        }
-        
-        iframe {
-            width: 100%;
-            height: 700px;
-            border: none;
-            display: block;
-            margin-bottom: 20px;
-        }
-        
-        .content a {
-            color: white;
-        }
-        
-        .content a:hover {
-            color: grey;
-        }
-        
-        .content ul {
-            padding: 0;
-            list-style-type: none;
-            display: flex;
-            justify-content: left;
-            gap: 30px;
-            flex-wrap: wrap;
-            flex-direction: column; /* Add this to stack items vertically */
-        }
-        
-        .content li {
-            display: block; /* Change back to block */
-            position: relative;
-            padding-left: 35px; /* Space for checkmark */
-            line-height: 1.4;
-            margin-bottom: 15px; /* Space between items */
-            word-wrap: break-word;
-        }
-        
-        .content li::before {
-            content: "\2713";
-            color: white;
-            font-size: 24px;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-        
-        h1 {
-            color: orange;
-            text-align: center;
-        }
-        
-        h2 {
-            text-align: center;
-        }
-        
-        #iframe-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Center buttons horizontally */
-            text-align: center;
-        }
-        
-        button {
-            font-size: 18px;
-            padding: 15px 25px;
-            margin: 10px;
-            border: none;
-            border-radius: 8px;
-            background-color: #007BFF;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        
-        button:hover {
-            background-color: #0056b3;
-        }
-        
-        .highlight {
-            color: orange;
-            text-decoration: underline;
-            font-weight: bold;
-        }
-        
-        /* Orange diagonal banner */
-        .diagonal-banner {
-            position: fixed;
-            top: 60px; /* Lowered from 20px to 40px */
-            right: -55px;
-            width: 270px;
-            height: 40px;
-            background-color: orange; /* Changed to match your website's orange */
-            color: white;
-            text-align: center;
-            line-height: 40px;
-            font-size: 15px; /* Slightly smaller font to ensure text fits */
-            font-weight: bold;
-            transform: rotate(45deg);
-            z-index: 999;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            text-decoration: none;
-            display: block;
-            transition: background-color 0.3s ease;
-        }
-        
-        .diagonal-banner:hover {
-            background-color: #e68900; /* Darker orange for hover effect */
-            color: white;
-            text-decoration: none;
-        }
-        
-            </style>
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    padding-right: 180px; /* Space for banner */
+}
+
+.navbar-brand {
+    font-size: 28px;
+    font-weight: bold;
+    color: orange;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+    color: #FFA500;
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 30px;
+}
+
+.navbar-menu li {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-menu li::before {
+    display: none;
+}
+
+.navbar-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.navbar-menu a:hover {
+    color: orange;
+    background-color: rgba(255, 165, 0, 0.1);
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Nav Mobile Responsive */
+@media (max-width: 1060px) {
+    .navbar-container {
+        padding-right: 20px;
+    }
+    
+    .navbar-menu {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(20, 20, 20, 0.98) 100%);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 50px;
+        transition: left 0.3s ease;
+        gap: 20px;
+    }
+
+    .navbar-menu.active {
+        left: 0;
+    }
+
+    .navbar-menu a {
+        font-size: 18px;
+        padding: 15px 20px;
+        width: 80%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .navbar-brand {
+        font-size: 24px;
+    }
+}
+
+/* Nav Smooth scrolling and scroll offset fixes */
+html {
+    scroll-behavior: smooth;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-y: scroll; /* Always show vertical scrollbar */
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    padding-top: 80px;
+}
+
+/* Nav Fix for scroll offset to account for fixed navbar */
+h1[id], h2[id], iframe[id] {
+    scroll-margin-top: 100px;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('defirilla.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    animation: fadeIn 3s forwards;
+    z-index: -1;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 0.4;
+    }
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    color: white;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+.box {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 40px;
+    border-radius: 10px;
+    text-align: left;
+    max-width: 100%;
+    width: 1000px;
+    height: 80vh;
+    overflow-y: auto;
+}
+
+iframe {
+    width: 100%;
+    height: 700px;
+    border: none;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.content a {
+    color: white;
+}
+
+.content a:hover {
+    color: grey;
+}
+
+.content ul {
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    justify-content: left;
+    gap: 30px;
+    flex-wrap: wrap;
+    flex-direction: column; /* Add this to stack items vertically */
+}
+
+.content li {
+    display: block; /* Change back to block */
+    position: relative;
+    padding-left: 35px; /* Space for checkmark */
+    line-height: 1.4;
+    margin-bottom: 15px; /* Space between items */
+    word-wrap: break-word;
+}
+
+.content li::before {
+    content: "\2713";
+    color: white;
+    font-size: 24px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+h1 {
+    color: orange;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+#iframe-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center buttons horizontally */
+    text-align: center;
+}
+
+button {
+    font-size: 18px;
+    padding: 15px 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.highlight {
+    color: orange;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/* Orange diagonal banner */
+.diagonal-banner {
+    position: fixed;
+    top: 60px; /* Lowered from 20px to 40px */
+    right: -55px;
+    width: 270px;
+    height: 40px;
+    background-color: orange; /* Changed to match your website's orange */
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    font-size: 15px; /* Slightly smaller font to ensure text fits */
+    font-weight: bold;
+    transform: rotate(45deg);
+    z-index: 999;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.diagonal-banner:hover {
+    background-color: #e68900; /* Darker orange for hover effect */
+    color: white;
+    text-decoration: none;
+}
+
+/* Section navigation styles */
+.content-section {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.section-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.nav-button {
+    background-color: rgba(255, 165, 0, 0.8);
+    color: black;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.nav-button:hover {
+    background-color: orange;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.active-section {
+    display: block;
+}
+    </style>
     
 </head>
 <body>
 
-
 <!-- Navigation Bar -->
 <nav class="navbar">
     <div class="navbar-container">
-        <a href="#top" class="navbar-brand">DeFiRilla</a>
+        <a href="#" class="navbar-brand" onclick="showSection('home'); return false;">DeFiRilla</a>
         <ul class="navbar-menu" id="navbar-menu">
-            <li><a href="#demo">Demo</a></li>
-            <li><a href="#request">Monitor your wallet's DeFi</a></li>
-            <li><a href="#alerts">Example alerts</a></li>
-            <li><a href="#motivation">Motivation</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#" onclick="showSection('demo'); return false;">Demo</a></li>
+            <li><a href="#" onclick="showSection('request'); return false;"><b>Monitor Your Wallet's DeFi</b></a></li>
+            <li><a href="#" onclick="showSection('alerts'); return false;">Example alerts</a></li>
+            <li><a href="#" onclick="showSection('motivation'); return false;">Motivation</a></li>
+            <li><a href="#" onclick="showSection('contact'); return false;">Contact</a></li>
         </ul>
         <div class="menu-toggle" id="menu-toggle">
             <span></span>
@@ -338,28 +375,23 @@
     </div>
 </nav>
 
-
 <!-- Orange diagonal banner -->
 <a href="https://x.com/swellnetworkio/status/1914253168554447087" target="_blank" class="diagonal-banner">
 Trusted by Swell Blockchain
 </a>
 
-
-    <div class="background"></div>
-    <div class="content">
-        <div class="box">
-   
-            <h1>Early Access:<br/>DeFi Wallet Health & Yield Monitoring Notification Alerts</h1>
-
+<div class="background"></div>
+<div class="content">
+    <div class="box">
+        <!-- Home Section -->
+        <div id="home-section" class="content-section active-section">
+            <h1>DeFi Wallet Health & Yield Monitoring Notification Alerts</h1>
             <br/>
-
             <h2>Paste your wallet address for auto alerting on <b>ALL</b> your wallet's DeFi positions:</h2>
-
             <br/>
-
             <ul>
                 <li>
-                    Set & forget in 18 seconds: just&nbsp;<em class="highlight">PASTE</em>&nbsp;a public wallet addres sand you're done&nbsp;=>&nbsp;<b>no security risk</b>&nbsp;as no need to connect your wallet or sign anything
+                    Set & forget in 18 seconds: just&nbsp;<em class="highlight">PASTE</em>&nbsp;a public wallet address and you're done&nbsp;=>&nbsp;<b>no security risk</b>&nbsp;as no need to connect your wallet or sign anything
                 </li>
                 <li>
                     <em class="highlight">Remain anonymous</em>&nbsp;via email (instead of Telegram) alerts using any free third party email relay service (instructions provided)&nbsp;=>&nbsp;<b>no way to link your real email to your wallet</b>
@@ -394,57 +426,33 @@ Trusted by Swell Blockchain
                 <li>&amp; more</li>
             </ul>
             
+            <div class="section-nav">
+                <button class="nav-button" onclick="showSection('demo')">Watch Demo</button>
+                <button class="nav-button" onclick="showSection('request')">Monitor Your Wallet's DeFi</button>
+                <!-- <button class="nav-button" onclick="showSection('alerts')">See Example Alerts</button> -->
+            </div>
+        </div>
 
-            Scroll down the page to <b><a href=#alerts>see the actual most recently generated DeFi notifications sent to other subscribers</a></b>
-
-
-
-
-<br/><br/><hr/><br/>
-
-<h1 id="demo">Paste a wallet address for its DeFi Telegram notifications in 18s</h1>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/WVWG0BD95a4" 
-frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
-
-
-            <br/><br><br/><hr/><br/>
-
-
-<!--
-            <h2>What this landing page is for</h2>
-
-            <br/>
-            This is a personal project currently provided 100% free of charge to a select audience to setup <b>realtime wallet DeFi notification alerts</b> for one wallet each for the sole purpose of gathering feedback if it provides any value?
-            <br/>
-            </br>
-
-            IMPORTANT: This service is working but is pre-beta: it is <b>not publically released, not finished, may not be accurate and <em class="highlight">does not request or accept any kind of payment and does not request or accept any kind of wallet connection</em></b>
-            <br/>
-            <br/>
-            <br/>
-            This landing page is <b>only</b> designed to:
-            <ul>
-                <ol>1) list the types of <b>DeFi yield wallet monitoring notifications</b></ol>
-                <ol>2) show <b>examples of <a href=#alerts>real alerts</a></b> just sent to other experts</b></ol>
-                <ol>3) allow you to automatically <b>monitor via alerts all your wallet's DeFi yield positions by either email or telegram</b><br/>(just paste your <b>public wallet address</b> and for <b>free</b>)</ol>
-            </ul>
-
-
-            <br/><br/><hr/><br/>
--->
+        <!-- Demo Section -->
+        <div id="demo-section" class="content-section">
+            <h1>Paste a wallet address for its DeFi Telegram notifications in 18s</h1>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/WVWG0BD95a4" 
+                    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>
             
+            <div class="section-nav">
+                <button class="nav-button" onclick="showSection('home')">Home</button>
+                <button class="nav-button" onclick="showSection('request')">Monitor Your Wallet's DeFi</button>
+                <button class="nav-button" onclick="showSection('alerts')">See Example Alerts</button>
+            </div>
+        </div>
 
-            <h1 id="request">Instant setup of DeFi monitoring alerts on your wallet</h1>
-
-            It takes 18 seconds to <b>paste your public wallet address to start monitoring ALL your own/anyone's* wallet's DeFi positions</b> via Telegram or email notifications (instructions are given how to optionally use a free 100% anonymous email relay service so <b>your wallet cannot be linked to your email</b>)
-
-            <br/><br/><small>Please only setup alerts on your main best wallet with most DeFi yield positions as our servers cannot scale at this time
-            <br/>If you do want to monitor more than one wallet, please just contact us first (support {AT} defirilla.com) so we can scale our servers for you if required</small>
-
+        <!-- Request Section -->
+        <div id="request-section" class="content-section">
+            <h1>Request DeFi monitoring alerts on your wallet</h1>
+            <p>It takes a 18 seconds to <b>paste your own/anyone's* wallet and monitor ALL the wallet's DeFi positions</b> via Telegram or (anonymous) email notifications (instructions are given how to optionally use a free 100% anonymous email relay service so <b>your wallet cannot be linked to your email</b>)</p>
+            <br/><small>Please only request alerts on your main best wallet with most DeFi yield positions each of at least $50 as our servers cannot scale at this time</small>
             <br/><br/>
-
             <div id="iframe-container">
             
                 <button onclick="document.getElementById('iframe-container').innerHTML = `<iframe src='https://docs.google.com/forms/d/e/1FAIpQLSdcEyubSeHfekHZIUF_LxE1EvGr9QPvpyUOxwUiaP6gZCLjnQ/viewform?embedded=true' frameborder='0'></iframe>`">Email - detailed notifications, with explanations and calculations</button>
@@ -454,73 +462,96 @@ allowfullscreen></iframe>
                 <button onclick="window.open(`https://t.me/DeFiRillaBot`, `_blank`)">Telegram - simplified notifications</button>
 
             </div>
-
             <br/><small>* please bear in mind that if you are not familiar with someone else's positions it maybe hard to make sense of their alerts</small>
-
-            <!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdcEyubSeHfekHZIUF_LxE1EvGr9QPvpyUOxwUiaP6gZCLjnQ/viewform?embedded=true" frameborder="0">Loading…</iframe> -->
-
-            <br/><br/><br/><hr/><br/>
-
-            <iframe id="alerts" src="https://DeFir-330f01ac30a4.herokuapp.com/most_recent_alerts.html" frameborder="0" style="width: 100%; height: 500px; border: none;">Loading...</iframe>
-
-            <br/><br/><hr/><br/>
-
-
-            <h2 id="motivation">Motivation</h2>
-
-            I started this personal project three years ago after getting badly liquidated and my remaining crypto was returned to me converted into stable coins.
             
-            <br/><br/>I did not notice for weeks.
+            <div class="section-nav">
+                <button class="nav-button" onclick="showSection('home')">Home</button>
+                <button class="nav-button" onclick="showSection('demo')">Watch Demo</button>
+                <button class="nav-button" onclick="showSection('alerts')">See Example Alerts</button>
+            </div>
+        </div>
 
-            <br/><br/>Unfortunately, when I did notice the crypto market had pumped considerably, and I was only able to convert the returned stable coins into a tiny fraction of my original crypto.
-
-            <br/><br/>Like almost all DeFi sites, they had no kind of monitoring or alerting system I could have set up.
-
-            <br/><br/>The final straw was when Aave removed their health notification system, I knew I had to find a DeFi monitoring solution.
-
-            <br/><br/>I tried every existing "monitoring" and "alert" system but none provided the health factor alerts I required across ALL DeFi yield protocols.
-
-            <br/><br/>So I set out on a personal project to build realtime notification alerts for myself.
-
-            <br/><br/>It turned out to be much more complicated than I anticipated to autodetect and support all DeFi sites across all EVM chains and provide realtime alerts on their health factors.
-
-            <br/><br/>But I finally managed it.
+        <!-- Alerts Section -->
+        <div id="alerts-section" class="content-section">
+            <h1>Example Alerts</h1>
+            <iframe src="https://DeFir-330f01ac30a4.herokuapp.com/most_recent_alerts.html" frameborder="0" style="width: 100%; height: 500px; border: none;">Loading...</iframe>
             
-            <br/><br/>It was then relatively trivial to add a whole range of different alerts which save me time and effort including real reward, borrow & supply APRs, when my DeFi limit orders hit, and more recently alerts when my LPs exit range.
+            <div class="section-nav">
+                <button class="nav-button" onclick="showSection('home')">Home</button>
+                <button class="nav-button" onclick="showSection('request')">Monitor Your Wallet's DeFi</button>
+                <button class="nav-button" onclick="showSection('motivation')">Motivation</button>
+            </div>
+        </div>
 
-            <br/><br/>When describing the platform to my non crypto mentors, as there is nothing like it, they recommend I seek feedback from other crypto DeFi yield experts if it also adds value to them and is worth developing into a Startup.
-
-            <br/><br/>And here we are today.
+        <!-- Motivation Section -->
+        <div id="motivation-section" class="content-section">
+            <h2>Motivation</h2>
+            <p>I started this personal project three years ago after getting badly liquidated and my remaining crypto was returned to me converted into stable coins.</p>
+            <br/><p>I did not notice for weeks.</p>
+            <br/><p>Unfortunately, when I did notice the crypto market had pumped considerably, and I was only able to convert the returned stable coins into a tiny fraction of my original crypto.</p>
+            <br/><p>Like almost all DeFi sites, they had no kind of monitoring or alerting system I could have set up.</p>
+            <br/><p>The final straw was when Aave removed their health notification system, I knew I had to find a DeFi monitoring solution.</p>
+            <br/><p>I tried every existing "monitoring" and "alert" system but none provided the health factor alerts I required across ALL DeFi yield protocols.</p>
+            <br/><p>So I set out on a personal project to build realtime notification alerts for myself.</p>
+            <br/><p>It turned out to be much more complicated than I anticipated to autodetect and support all DeFi sites across all EVM chains and provide realtime alerts on their health factors.</p>
+            <br/><p>But I finally managed it.</p>
+            <br/><p>It was then relatively trivial to add a whole range of different alerts which save me time and effort including real reward, borrow & supply APRs, when my DeFi limit orders hit, and more recently alerts when my LPs exit range.</p>
+            <br/><p>When describing the platform to my non crypto mentors, as there is nothing like it, they recommend I seek feedback from other crypto DeFi yield experts if it also adds value to them and is worth developing into a Startup.</p>
+            <br/><p>And here we are today.</p>
+            <br/><p>I am currently working on it full time to keep it up, resolve bugs and implement requested features.</p>
+            <br/><p><b>I appreciate you being early and also your time, patience and expertise</b>.</p>
             
-            <br/><br/>I am currently working on it full time to keep it up, resolve bugs and implement requested features.
+            <div class="section-nav">
+                <button class="nav-button" onclick="showSection('home')">Home</button>
+                <button class="nav-button" onclick="showSection('request')">Monitor Your Wallet's DeFi</button>
+                <button class="nav-button" onclick="showSection('contact')">Contact Us</button>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div id="contact-section" class="content-section">
+            <h2>Contact</h2>
+            <p>support {AT} defirilla.com | <a href="https://discord.com/invite/kfzVSUffDA" target="_blank">Discord</a> | X (Twitter) public alerts are not representative of private alerts <a href="https://x.com/@DefiRilla" target="_blank">@DefiRilla</a> | NFA. DYOR.</p>
             
-            <br/><br/><b>I appreciate you being early and also your time, patience and expertise</b>.
-
-            <br/><br/><hr/><br/>
-
-            <h2 id="contact">Contact</h2>
-
-            support {AT} defirilla.com | <a href="https://discord.com/invite/kfzVSUffDA" target="_blank">Discord</a> | X (Twitter) public alerts are not representative of private alerts <a href="https://x.com/@DefiRilla" target="_blank">@DefiRilla</a> | NFA. DYOR.
-
-            <br/>
-            <br/>
-
+            <div class="section-nav">
+                <button class="nav-button" onclick="showSection('home')">Home</button>
+                <button class="nav-button" onclick="showSection('request')">Monitor Your Wallet's DeFi</button>
+                <button class="nav-button" onclick="showSection('motivation')">Our Story</button>
+            </div>
         </div>
     </div>
-
+</div>
 
 <script>
+// Section toggle functionality
+function showSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active-section');
+    });
+    
+    // Show the requested section
+    if (sectionId === 'top') sectionId = 'home';
+    document.getElementById(sectionId + '-section').classList.add('active-section');
+    
+    // Scroll to top of content
+    document.querySelector('.box').scrollTop = 0;
+    
+    // Close mobile menu if open
+    document.getElementById('navbar-menu').classList.remove('active');
+    
+    // Update URL hash without scrolling
+    if (history.pushState) {
+        history.pushState(null, null, '#' + sectionId);
+    } else {
+        location.hash = '#' + sectionId;
+    }
+}
+
 // Nav Mobile menu toggle
 document.getElementById('menu-toggle').addEventListener('click', function() {
     const menu = document.getElementById('navbar-menu');
     menu.classList.toggle('active');
-});
-
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.navbar-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        document.getElementById('navbar-menu').classList.remove('active');
-    });
 });
 
 // Close mobile menu when clicking outside
@@ -532,8 +563,17 @@ document.addEventListener('click', function(event) {
         menu.classList.remove('active');
     }
 });
-</script>
 
+// Check for hash in URL on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+        showSection(hash);
+    } else {
+        showSection('home');
+    }
+});
+</script>
 
 </body>
 </html>
