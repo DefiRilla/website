@@ -137,22 +137,21 @@
 /* Nav Smooth scrolling and scroll offset fixes */
 html {
     scroll-behavior: smooth;
-}
-
-body, html {
     margin: 0;
     padding: 0;
-    height: 100%;
     overflow-x: hidden; /* Prevent horizontal scroll */
-    overflow-y: scroll; /* Always show vertical scrollbar */
-    font-family: 'Roboto', sans-serif;
+    overflow-y: auto; /* only the page scrolls */
 }
 
 body {
-    padding-top: 80px;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    padding-top: 80px; /* navbar offset */
+    min-height: 100vh;
+    overflow: visible;
 }
 
-/* Nav Fix for scroll offset to account for fixed navbar */
 h1[id], h2[id], iframe[id] {
     scroll-margin-top: 100px;
 }
@@ -178,18 +177,14 @@ h1[id], h2[id], iframe[id] {
 }
 
 .content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
+    display: block;
     color: white;
     position: relative;
     z-index: 1;
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
-    overflow: auto;
+    overflow: visible;
 }
 
 .box {
@@ -197,10 +192,10 @@ h1[id], h2[id], iframe[id] {
     padding: 40px;
     border-radius: 10px;
     text-align: left;
-    max-width: 100%;
     width: 1000px;
-    height: 80vh;
-    overflow-y: auto;
+    max-width: 100%;
+    margin: 0 auto; /* center without flex */
+    overflow: visible; /* ensure no inner scroll */
 }
 
 iframe {
@@ -209,6 +204,12 @@ iframe {
     border: none;
     display: block;
     margin-bottom: 20px;
+}
+
+/* Alerts iframe: remove inner scrollbar by making it tall and hiding its own scrollbar */
+#alerts-section iframe {
+    height: 1400px; /* adjust if needed */
+    overflow: hidden;
 }
 
 .content a {
@@ -472,7 +473,8 @@ Trusted by Swell Blockchain
         <!-- Alerts Section -->
         <div id="alerts-section" class="content-section">
             <h1>Example Alerts</h1>
-            <iframe src="https://DeFir-330f01ac30a4.herokuapp.com/most_recent_alerts.html" frameborder="0" style="width: 100%; height: 500px; border: none;">Loading...</iframe>
+            <!-- removed inline height; added scrolling="no" -->
+            <iframe src="https://DeFir-330f01ac30a4.herokuapp.com/most_recent_alerts.html" scrolling="no">Loading...</iframe>
             
             <div class="section-nav">
                 <button class="nav-button" onclick="showSection('home')">Features</button>
@@ -496,7 +498,7 @@ Trusted by Swell Blockchain
             <br/><p>It was then relatively trivial to add a whole range of different alerts which save us time and effort including calculating real reward, borrow & supply APRs, when our DeFi limit orders hit and alerts when our LPs are about to enter or range - all across ALL DeFi sites on ALL EVM blockchains.</p>
             <br/><p>When describing the platform to my non crypto mentors, as there is nothing like it, they recommend I seek feedback from other crypto DeFi experts if it also adds value to them and is worth developing into a Startup to help others already in, or those who want to start using DeFi?</p>
             <br/><p>And here we are today.</p>
-            <br/><p>I am still working on it full time to keep the numerous servers running, resolve bugs and implement requested features.</p>
+            <br/><p>I am still working on DefiRilla full time to keep the numerous servers running, resolve bugs and implement requested features.</p>
             <br/><p><b>I appreciate you being early and your time and expertise providing feedback to improve this novel service making DeFi easier, safer and more rewarding</b>.</p>
             
             <div class="section-nav">
@@ -532,8 +534,8 @@ function showSection(sectionId) {
     if (sectionId === 'top') sectionId = 'home';
     document.getElementById(sectionId + '-section').classList.add('active-section');
     
-    // Scroll to top of content
-    document.querySelector('.box').scrollTop = 0;
+    // Scroll to top of page
+    window.scrollTo({ top: 0 });
     
     // Close mobile menu if open
     document.getElementById('navbar-menu').classList.remove('active');
