@@ -398,7 +398,7 @@ Trusted by Swell Blockchain
                 (function(){
                     const holder = document.getElementById('home-features');
                     if (!holder) return;
-                    fetch('partials/home_features.html')
+                    fetch('home_features_from_https.html')
                         .then(r => { if (!r.ok) throw new Error(r.statusText); return r.text(); })
                         .then(html => holder.innerHTML = html)
                         .catch(err => {
