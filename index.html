@@ -402,7 +402,7 @@ Trusted by Swell Blockchain
                         .then(r => { if (!r.ok) throw new Error(r.statusText); return r.text(); })
                         .then(html => holder.innerHTML = html)
                         .catch(err => {
-                            console.error('Failed to load home features partial:', err);
+                            console.error('Failed to load home features:', err);
                             holder.innerHTML = '<!-- failed to load features -->';
                         });
                 })();
@@ -462,22 +462,24 @@ Trusted by Swell Blockchain
 
         <!-- Motivation Section -->
         <div id="motivation-section" class="content-section">
-            <h2>Motivation</h2>
-            <p>I started working full time on this personal project three and a half years ago after getting badly liquidated for the third time.</p>
-            <br/><p>I did not notice for weeks, nor that my remaining crypto was returned to me converted into stable coins.</p>
-            <br/><p>Unfortunately, when I did notice the crypto market had pumped considerably, and I was only able to convert the returned stable coins into a tiny fraction of my original crypto.</p>
-            <br/><p>Like almost all DeFi sites, they had no kind of monitoring or alerting system I could have set up.</p>
-            <br/><p>The final straw was when Aave removed their health notification system - I knew I had to find a comprehensive DeFi monitoring solution.</p>
-            <br/><p>I tried every existing "monitoring" and "alert" system but none provided the health factor alerts I required across ALL DeFi yield protocols.</p>
-            <br/><p>So I set out on a personal project to build realtime notification alerts for myself and my friends.</p>
-            <br/><p>It turned out to be much more complicated than I anticipated to autodetect and support ALL DeFi sites across ALL EVM chains and provide realtime alerts on initially just their health factors.</p>
-            <br/><p>But I finally managed it.</p>
-            <br/><p>It was then relatively trivial to add a whole range of different alerts which save us time and effort including calculating real reward, borrow & supply APRs, when our DeFi limit orders hit and alerts when our LPs are about to enter or range - all across ALL DeFi sites on ALL EVM blockchains.</p>
-            <br/><p>When describing the platform to my non crypto mentors, as there is nothing like it, they recommend I seek feedback from other crypto DeFi experts if it also adds value to them and is worth developing into a Startup to help others already in, or those who want to start using DeFi?</p>
-            <br/><p>And here we are today.</p>
-            <br/><p>I am still working on DefiRilla full time to keep the numerous servers running, resolve bugs and implement requested features.</p>
-            <br/><p><b>I appreciate you being early and your time and expertise providing feedback to improve this novel service making DeFi easier, safer and more rewarding</b>.</p>
-            
+            <!-- motivation content injected from external partial -->
+            <div id="motivation-content">Loading motivation…</div>
+
+            <script>
+                (function(){
+                    const holder = document.getElementById('motivation-content');
+                    if (!holder) return;
+                    fetch('motivation_from_https.html')
+                        .then(r => { if (!r.ok) throw new Error(r.statusText); return r.text(); })
+                        .then(html => holder.innerHTML = html)
+                        .catch(err => {
+                            console.error('Failed to load motivation partial:', err);
+                            holder.innerHTML = '<!-- failed to load motivation -->';
+                        });
+                })();
+            </script>
+
+
             <div class="section-nav">
                 <button class="nav-button" onclick="showSection('home')">Features</button>
                 <button class="nav-button" onclick="showSection('request')">Monitor Your Wallet's DeFi</button>
