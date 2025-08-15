@@ -390,46 +390,23 @@ Trusted by Swell Blockchain
             <br/>
             <h2>Paste your wallet address for auto alerting on health, LP and yield of <b>ALL</b> your wallet's DeFi positions:</h2>
             <br/>
-            <ul>
-                <li>
-                    Set & forget in 18 seconds: just&nbsp;<em class="highlight">PASTE</em>&nbsp;a public wallet EVM address and you're done&nbsp;=>&nbsp;<b>no security risk</b>&nbsp;as no need to connect your wallet or sign anything
-                </li>
-                <li>
-                    <em class="highlight">Remain anonymous</em>&nbsp;via email (instead of Telegram) alerts using any free third party email relay service (instructions provided)&nbsp;=>&nbsp;<b>no way to link your real email to your wallet</b>
-                </li>
-                <li>
-                    Auto discovers all your onchain net worth:&nbsp;<em class="highlight">ALL your wallet's DeFi protocol sites</em>&nbsp;(including newly launched protocols) &&nbsp;<em class="highlight">ALL your wallet's coins</em>&nbsp;across&nbsp;<em class="highlight">ALL EVM blockchains</em>&nbsp;=>&nbsp;<b>no need to keep 10 tabs open</b>
-                </li>
-                <li>
-                    <em class="highlight">Continuous monitoring of all your DeFi positions with timely alerts when something needs your attention</em>&nbsp;(not just when there is a blockchain transaction) =>&nbsp;<b>never forget about a position again:</b>
-                    <!-- stops bad things happening: position may have become unprofitable e.g. due to borrow APR -->
-                </li>
-                <li>
-                    Know as soon as your&nbsp;<em class="highlight">health factors change</em>&nbsp;=> avoid liquidations while borrowing and leveraging more for&nbsp;<b>higher capital efficiency</b>
-                    <!-- makes and saves people money -->
-                </li>
-                <li>
-                    Continuous calculations of your actual (not estimated)&nbsp;<em class="highlight">current yield including borrow/supply/reward APRs</em>&nbsp;=> ensure you are always&nbsp;<b>beating the market</b>
-                    <!-- makes and saves people money -->
-                </li>
-                <li>
-                    24/7 monitoring so you know when your liquidity positions are close to&nbsp;<em class="highlight">entering/exiting active reward range</em>&nbsp;=> easily LP a tighter range&nbsp;<b>for higher rewards</b>
-                    <!-- makes and saves people money -->
-                </li>
-                <li>
-                    Reminders to take profit when the price of your&nbsp;<em class="highlight">coins & unclaimed DeFi rewards pump in relation to your favourite "HODL" coin</em>&nbsp;=> do better than DCA <small>(Dollar Cost Averaging. "HODL" coin defaults to USD, contact us to change. NFA)</small>
-                    <!-- makes people money -->
-                </li>
-                <li>
-                    Know when your&nbsp;<em class="highlight">limit orders execute</em>&nbsp;=>&nbsp;<b>make more</b>&nbsp;by immediately putting your coins to work
-                </li>
-                <li>Know when your DeFi positions are&nbsp;<em class="highlight">entered, exited or change significantly in value</em></li>
-                <li>
-                    Know as soon as you&nbsp;<em class="highlight">receive Airdrops</em>&nbsp;=> option to&nbsp;<b>sell before the crowds</b>
-                    <!-- makes people money -->
-                </li>
-                <li>&amp; more</li>
-            </ul>
+            <!-- replaced duplicated <ul> with an injected partial -->
+            <div id="home-features">Loading features…</div>
+
+            <!-- script to load the shared partial -->
+            <script>
+                (function(){
+                    const holder = document.getElementById('home-features');
+                    if (!holder) return;
+                    fetch('home_features_from_https.html')
+                        .then(r => { if (!r.ok) throw new Error(r.statusText); return r.text(); })
+                        .then(html => holder.innerHTML = html)
+                        .catch(err => {
+                            console.error('Failed to load home features:', err);
+                            holder.innerHTML = '<!-- failed to load features -->';
+                        });
+                })();
+            </script>
             
             <div class="section-nav">
                 <button class="nav-button" onclick="showSection('demo')">Watch Demo</button>
