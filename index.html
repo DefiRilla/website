@@ -134,6 +134,11 @@
     }
 }
 
+/* Add global box-sizing to prevent overflow */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 /* Nav Smooth scrolling and scroll offset fixes */
 html {
     scroll-behavior: smooth;
@@ -196,6 +201,12 @@ h1[id], h2[id], iframe[id] {
     max-width: 100%;
     margin: 0 auto; /* center without flex */
     overflow: visible; /* ensure no inner scroll */
+}
+
+@media (max-width: 768px) {
+    .box {
+        padding: 10px; /* Further reduce for very small screens */
+    }
 }
 
 iframe {
@@ -311,6 +322,12 @@ button:hover {
     background-color: #e68900; /* Darker orange for hover effect */
     color: white;
     text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .diagonal-banner {
+        display: none; /* Hide on small screens to prevent overflow */
+    }
 }
 
 /* Section navigation styles */
