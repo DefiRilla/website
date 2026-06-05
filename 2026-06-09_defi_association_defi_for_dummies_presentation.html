@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeFi for Dummies — DefiRilla</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+  :root{--green:#00ff88;--blue:#00c8ff;--purple:#9b5de5;--orange:#ff6b35;--red:#ff4757;--yellow:#ffd93d;--bg:#070b14;--card:#111827;--border:#1e2d42;--text:#ffffff;--muted:#cbd5e1}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow:hidden;height:100vh;width:100vw}
+  .slide{display:none;position:absolute;inset:0;padding:40px 56px 68px;animation:fadeIn .35s ease;overflow:hidden}
+  .slide.active{display:flex;flex-direction:column}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  #nav{position:fixed;bottom:0;left:0;right:0;height:54px;background:rgba(7,11,20,.97);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;z-index:100;backdrop-filter:blur(8px)}
+  #nav button{background:var(--card);border:1px solid var(--border);color:var(--text);padding:7px 22px;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;cursor:pointer;transition:all .2s}
+  #nav button:hover{border-color:var(--green);color:var(--green)}
+  #counter{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted)}
+  #pb{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--green),var(--blue));transition:width .3s ease;z-index:101}
+  .big{font-size:clamp(36px,5.5vw,68px);font-weight:900;line-height:1.05}
+  .sub{font-size:clamp(15px,1.5vw,17px);color:var(--muted);margin-top:8px}
+  .lbl{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+  .tag{display:inline-block;padding:3px 12px;border-radius:99px;font-size:13px;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:.05em;margin-right:6px}
+  .tg{background:rgba(0,255,136,.12);color:var(--green);border:1px solid rgba(0,255,136,.3)}
+  .tb{background:rgba(0,200,255,.12);color:var(--blue);border:1px solid rgba(0,200,255,.3)}
+  .to{background:rgba(255,107,53,.12);color:var(--orange);border:1px solid rgba(255,107,53,.3)}
+  .tr{background:rgba(255,71,87,.12);color:var(--red);border:1px solid rgba(255,71,87,.3)}
+  .ty{background:rgba(255,217,61,.12);color:var(--yellow);border:1px solid rgba(255,217,61,.3)}
+  .tp{background:rgba(155,93,229,.12);color:var(--purple);border:1px solid rgba(155,93,229,.3)}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 22px}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1}
+  .g2>div:has(>.rsk){flex-direction:row!important;flex-wrap:wrap}
+  .g2>div:has(>.rsk)>.rsk{flex:0 0 100%;order:0}
+  .g2>div:has(>.rsk)>.joke{flex:1 1 0;min-width:0;order:1}
+  .g2>div:has(>.rsk)>.mon{flex:1 1 0;min-width:0;order:2}
+  .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;flex:1}
+  .mtop{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
+  .mico{font-size:44px;line-height:1;flex-shrink:0}
+  .mname{font-size:clamp(26px,4vw,50px);font-weight:900;line-height:1}
+  .meli{font-size:clamp(15px,1.5vw,17px);color:var(--muted);margin-top:5px;font-style:italic}
+  .how{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px}
+  .how h4{font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px}
+  .how li{font-size:clamp(15px,1.4vw,17px);color:var(--text);line-height:1.7;padding-left:4px}
+  .how ul{list-style:none;padding:0}
+  .how li::before{content:'→ ';color:var(--green)}
+  .rsk{background:rgba(255,71,87,.07);border:1px solid rgba(255,71,87,.22);border-radius:12px;padding:14px 18px}
+  .rsk h4{font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--red);margin-bottom:8px}
+  .rsk li{font-size:clamp(15px,1.4vw,17px);color:#ffb3ba;line-height:1.7;padding-left:4px}
+  .rsk ul{list-style:none;padding:0}
+  .rsk li::before{content:''}
+  .mon{background:rgba(0,255,136,.06);border:1px solid rgba(0,255,136,.18);border-radius:10px;padding:12px 16px}
+  .mon h4{font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:5px}
+  .mon p{font-size:clamp(14px,1.3vw,16px);color:#aaffd6;line-height:1.5}
+  .joke{background:linear-gradient(135deg,rgba(255,107,53,.08),rgba(155,93,229,.08));border:1px solid rgba(255,107,53,.25);border-radius:12px;padding:12px 16px;font-size:clamp(15px,1.4vw,17px);color:#ffd8b8;line-height:1.5;font-style:italic;margin-top:12px}
+  .joke strong{color:#ffffff;font-style:normal}
+  .ag{color:var(--green)}.ab{color:var(--blue)}.ao{color:var(--orange)}.ar{color:var(--red)}.ay{color:var(--yellow)}.ap{color:var(--purple)}
+  .rt{width:100%;border-collapse:collapse;font-size:15px}
+  .rt th{text-align:left;padding:8px 12px;background:#0d1421;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border)}
+  .rt td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:middle;line-height:1.4}
+  .rt tr:last-child td{border-bottom:none}
+  .rt .m{font-weight:700;color:var(--blue)}
+  .rl{display:inline-block;padding:2px 9px;border-radius:99px;font-size:13px;font-weight:700}
+  .rlow{background:rgba(0,255,136,.12);color:var(--green)}
+  .rmed{background:rgba(255,217,61,.12);color:var(--yellow)}
+  .rhi{background:rgba(255,107,53,.12);color:var(--orange)}
+  .rdg{background:rgba(255,71,87,.12);color:var(--red)}
+  .ltick{background:rgba(255,107,53,.15);border:1px solid rgba(255,107,53,.4);color:var(--orange);border-radius:4px;padding:1px 6px;font-size:13px;font-weight:900;margin-right:5px}
+  .lnote{font-size:13px;color:#ffd8b8}
+  .mlist div{font-size:15px!important;line-height:1.5}
+  #s16 li{font-size:clamp(15px,1.4vw,17px)!important}
+  .sb{overflow-y:auto;flex:1}
+  .sb::-webkit-scrollbar{width:4px}
+  .sb::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+  .fg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;flex:1}
+  .ft{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+  .ft .fi{font-size:20px;margin-bottom:5px}
+  .ft h4{font-size:14px;font-weight:700;margin-bottom:3px}
+  .ft p{font-size:13px;color:var(--muted);line-height:1.5}
+  .url{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,rgba(0,255,136,.15),rgba(0,200,255,.1));border:1px solid rgba(0,255,136,.4);border-radius:10px;padding:10px 22px;font-size:16px;font-weight:700;color:var(--green);font-family:'JetBrains Mono',monospace}
+  #s1{background:radial-gradient(ellipse at 30% 40%,rgba(0,255,136,.06) 0%,transparent 60%),radial-gradient(ellipse at 80% 70%,rgba(0,200,255,.05) 0%,transparent 50%),var(--bg);align-items:center;justify-content:center;text-align:center}
+  .hero{font-size:clamp(52px,9vw,108px);font-weight:900;line-height:1;background:linear-gradient(135deg,var(--green),var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .spk{display:inline-flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:99px;padding:11px 22px;font-size:14px}
+  .fbg{position:absolute;font-size:120px;opacity:.03;pointer-events:none}
+  .timeb{position:absolute;top:22px;right:26px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:5px 12px;font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--muted)}
+  .srow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+  .stn{font-size:32px;font-weight:900;line-height:1}
+  .stl{font-size:13px;color:var(--muted);margin-top:4px}
+  #send{background:radial-gradient(ellipse at center,rgba(0,255,136,.08) 0%,transparent 70%),var(--bg);align-items:center;justify-content:center;text-align:center}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+
+<!-- SLIDE 1: TITLE -->
+<div class="slide active" id="s1">
+  <div class="fbg" style="top:-10px;left:-30px">₿</div>
+  <div class="fbg" style="bottom:60px;right:-10px">Ξ</div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:16px">
+    <div class="hero">DeFi for Dummies</div>
+    <div style="font-size:clamp(15px,2vw,21px);color:var(--muted);font-style:italic">By a Dummy who lost 90% of his crypto in more ways than you could possibly imagine…
+<br/><br/>
+<br/><br/>
+Let's learn how to lose money via:
+<br/><br/>
+</div>
+    <div style="font-size:clamp(24px,1.4vw,26px);color:var(--muted)">Staking · Lending · LP · Looping · Yield Farming · Perps &amp; more</div><br/><br/>
+    <div class="spk"><span style="font-size:32px; display:block; height:2.4em; overflow:hidden;"><img src="https://defirilla.com/defirilla.png" alt="DefiRilla" style="height:3em; display:block;"></span><div style="text-align:left"><div style="font-weight:700;font-size:32px">Andrew</div><div style="font-size:16px;color:var(--muted)">DeFi veteran who believes the best education comes from very, very expensive mistakes
+</div></div></div>
+  </div>
+</div>
+
+<!-- SLIDE 2: ABOUT -->
+<div class="slide" id="s2">
+  <div class="big" style="margin-bottom:16px">Who Am I? <img src="https://defirilla.com/defirilla.png" alt="DefiRilla" style="height:1em; vertical-align:middle;"></div>
+  <div class="srow">
+    <div class="stat"><div class="stn ab">12</div><div class="stl">DeFi methods tried</div></div>
+    <div class="stat"><div class="stn ar">12</div><div class="stl">Times I lost money</div></div>
+    <div class="stat"><div class="stn ao">100%</div><div class="stl">Loss rate. Flawless.</div></div>
+    <div class="stat"><div class="stn ay">₿</div><div class="stl">1000x better: HODL BTC</div></div>
+  </div>
+  <div class="card" style="flex:1;display:flex;flex-direction:column;gap:10px">
+    <div style="font-size:14px;font-weight:700;color:var(--muted)">Methods tried. Methods survived. (Financially: no.)</div>
+    <div class="mlist" style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;flex:1">
+      <div style="font-size:13px;line-height:1.5"><span class="ltick">✓</span> <span style="color:var(--blue);font-weight:700">Staking</span> <span style="color:var(--muted)">→ token went to almost zero. Rewards: $0.47.</span></div>
+      <div style="font-size:13px;line-height:1.5"><span class="ltick">✓</span> <span style="color:var(--blue);font-weight:700">Liquid Staking</span> <span style="color:var(--muted)">→ stETH de-pegged. Collateral wrecked.</span></div>
+      <div style="font-size:13px;line-height:1.5"><span class="ltick">✓</span> <span style="color:var(--blue);font-weight:700">Lending</span> <span style="color:var(--muted)">→ funds locked during a crash. Naturally.</span></div>
+      <div style="font-size:13px;line-height:1.5"><span class="ltick">✓</span> <span style="color:var(--blue);font-weight:700">Borrowing</span> <span style="color:var(--muted)">→ liquidated 3×. Didn't notice for weeks.</span></div>
+      <div style="font-size:13px;line-height:1.5"><span class="ltick">✓</span> <span style="color:var(--blue);font-weight:700">LP / AMM</span> <span style="color:var(--muted)">→ held 100% of the loser token.</span></div>
+      <div style="font-size:13px;line-height:1.5"><span class="ltick">✓</span> <span style="color:var(--blue);font-weight:700">Concentrated LP</span> <span style="color:var(--muted)">→ out of range 3 weeks. Zero fees.</span></div>
+      <div style="font-size:13px;line-height:1.5"><span class="ltick">✓</span> <span style="color:var(--blue);font-weight:700">Yield Farming</span> <span style="color:var(--muted)">→ 4,000% APR → artisanal poverty.</span></div>
+      <div style="font-size:13px;line-height:1.5"><span class="ltick">✓</span> <span style="color:var(--blue);font-weight:700">Looping</span> <span style="color:var(--muted)">→ 4× leverage. Loss also 4×. Surprise.</span></div>
+      <div style="font-size:13px;line-height:1.5"><span class="ltick">✓</span> <span style="color:var(--blue);font-weight:700">Leveraged Farming</span> <span style="color:var(--muted)">→ bank on fire. Went in anyway.</span></div>
+      <div style="font-size:13px;line-height:1.5"><span class="ltick">✓</span> <span style="color:var(--blue);font-weight:700">Stablecoin Yield</span> <span style="color:var(--muted)">→ USDC hit $0.87. "Stable" lol.</span></div>
+      <div style="font-size:13px;line-height:1.5"><span class="ltick">✓</span> <span style="color:var(--blue);font-weight:700">Perps</span> <span style="color:var(--muted)">→ liquidated making dinner. Cold pasta.</span></div>
+      <div style="font-size:13px;line-height:1.5"><span class="ltick">✓</span> <span style="color:var(--blue);font-weight:700">Airdrops</span> <span style="color:var(--muted)">→ $47 for 200 hours. $0.24/hr.</span></div>
+    </div>
+    <div style="font-size:14px;font-weight:700;color:var(--yellow);border-top:1px solid var(--border);padding-top:8px">₿ Should have just held BTC. <span style="color:var(--muted);font-weight:400">But where's the fun in that? (Everywhere. The fun is everywhere.)</span></div>
+  </div>
+  <div class="joke"><span style="font-size:18px">🪙</span> My crypto portfolio is like my hair colour — once rich and full of promise, now mostly grey. I've lost money in DeFi in so many creative ways I'm basically a <strong>cautionary Wikipedia article.</strong> Which makes me uniquely qualified to teach you <strong>exactly what not to do.</strong></div>
+</div>
+
+<!-- SLIDE 3: WHAT IS DEFI -->
+<div class="slide" id="s3">
+  <div class="big" style="margin-bottom:6px">What is <span class="ag">DeFi</span>?</div>
+  <div class="sub" style="margin-bottom:20px">Banking — but the bank is code, and the code has no customer service line</div>
+  <div class="g3" style="margin-bottom:16px">
+    <div class="card" style="display:flex;flex-direction:column;gap:10px">
+      <div style="font-size:34px">🏦</div>
+      <div style="font-size:20px;font-weight:800">Normal Bank</div>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:7px">
+        <li style="font-size:15px;color:var(--muted)">→ Bank holds your money</li>
+        <li style="font-size:15px;color:var(--muted)">→ Bank sets the rules</li>
+        <li style="font-size:15px;color:var(--muted)">→ Bank can freeze you out</li>
+        <li style="font-size:15px;color:var(--muted)">→ Bank earns the fees</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:rgba(0,255,136,.3);display:flex;flex-direction:column;gap:10px">
+      <div style="font-size:34px">⛓️</div>
+      <div style="font-size:20px;font-weight:800"><span class="ag">DeFi</span></div>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:7px">
+        <li style="font-size:15px;color:var(--text)">→ <strong>You</strong> hold your money</li>
+        <li style="font-size:15px;color:var(--text)">→ Code sets the rules</li>
+        <li style="font-size:15px;color:var(--text)">→ Nobody can stop you</li>
+        <li style="font-size:15px;color:var(--text)">→ <strong>You</strong> earn the fees</li>
+      </ul>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;gap:10px">
+      <div style="font-size:34px">⚠️</div>
+      <div style="font-size:20px;font-weight:800">The catch</div>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:7px">
+        <li style="font-size:15px;color:var(--muted)">→ No customer support</li>
+        <li style="font-size:15px;color:var(--muted)">→ No chargebacks</li>
+        <li style="font-size:15px;color:var(--muted)">→ Mistakes are permanent</li>
+        <li style="font-size:15px;color:var(--muted)">→ Code can have bugs</li>
+        <li style="font-size:15px;color:var(--muted)">→ Every click is a chance to lose everything</li>
+        <li style="font-size:15px;color:var(--muted)">→ 🤖 AI-powered hackers want your wallet</li>
+        <li style="font-size:15px;color:var(--muted)">→ 🇰🇵 North Korea <em>literally</em> wants your wallet</li>
+      </ul>
+    </div>
+  </div>
+  <div class="joke"><span style="font-size:18px">📖</span> DeFi gives you the excitement of a casino, the customer support of a vending machine, and the emotional stability of a rollercoaster — <strong>but YOU own the keys.</strong> Great, right up until you lose the keys.</div>
+</div>
+
+<!-- SLIDE 4: STAKING -->
+<div class="slide" id="s4">
+  <div class="mtop">
+    <div class="mico">🔒</div>
+    <div><div class="lbl ag">Method #1</div><div class="mname">Staking</div><div class="meli">Lock tokens, earn rewards. A savings account — but the interest, and the value of your capital, might go to zero.</div></div>
+    <div style="margin-left:auto"><span class="tag tg">~3–20% APY</span></div>
+  </div>
+  <div class="g2" style="flex:1">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="how"><h4>How it works</h4><ul><li>Deposit tokens into a staking protocol or validator (a node that processes and confirms transactions)</li><li>Network pays you rewards for helping validate transactions</li><li>Rewards are usually in the same token you staked</li></ul></div>
+      <div class="card" style="font-size:14px;color:var(--muted)">✅ Simple &nbsp;·&nbsp; ✅ Keep price upside &nbsp;·&nbsp; ✅ Fully passive</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="rsk"><h4>Main risks</h4><ul><li>📉 <strong>Token price crashes</strong> — rewards are paid in the same token you staked, so 20% APY means nothing if the token drops 90%</li><li>⛓️ <strong>Lock-up periods</strong> — funds are frozen for days or weeks, so you watch the price collapse with no way out</li><li>🐛 <strong>Smart contract bugs</strong> — if the protocol is exploited, funds can be drained instantly with no recourse or insurance</li></ul></div>
+      <div class="mon"><h4>📡 Monitor</h4><p>Watch the token price. High APY means nothing if the token halves.</p></div>
+      <div class="joke">🪙 Staked tokens with great APY. Token went to zero. Rewards were worth <strong>$0.47.</strong> I could have bought four Freddos and had change. Instead I held to zero.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: LIQUID STAKING -->
+<div class="slide" id="s5">
+  <div class="mtop">
+    <div class="mico">💧</div>
+    <div><div class="lbl ab">Method #2</div><div class="mname">Liquid Staking</div><div class="meli">Stake ETH, get a tradeable receipt (e.g. stETH) you can still use elsewhere. Earn while you earn.</div></div>
+    <div style="margin-left:auto"><span class="tag tb">~3–6% + composability</span></div>
+  </div>
+  <div class="g2" style="flex:1">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="how"><h4>How it works - stETH example:</h4><ul><li>Deposit ETH into Lido/Rocket Pool → get stETH</li><li>stETH earns staking rewards automatically</li><li>stETH can also be used as collateral (assets locked as security for a loan) or in other pools — stack yield</li></ul></div>
+      <div class="card" style="font-size:14px;color:var(--muted)">✅ No lock-up &nbsp;·&nbsp; ✅ Stack yield on yield &nbsp;·&nbsp; ✅ No 32 ETH minimum</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="rsk"><h4>Main risks</h4><ul><li>💔 <strong>De-peg:</strong> stETH can trade below ETH during a panic — you can't redeem 1:1 for ETH, so your collateral is worth less than you think</li><li>🏚️ <strong>Collateral collapse:</strong> if you borrowed against stETH and it de-pegs, your health factor drops instantly and you get liquidated</li><li>🎪 <strong>Centralisation risk:</strong> Lido controls ~30% of all staked ETH — a hack or regulatory action could impact the whole ecosystem at once</li></ul></div>
+      <div class="mon"><h4>📡 Monitor</h4><p>Watch the stETH/ETH peg — critical if you've borrowed against it.</p></div>
+      <div class="joke">💧 Used stETH as collateral to borrow ETH to buy more stETH. "Risk free!" stETH de-pegged slightly. Health factor <em style="font-style:normal;color:#ffffff">(your collateral safety score — below 1.0 = liquidated)</em> dropped <strong>faster than my self-esteem.</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: LENDING & BORROWING -->
+<div class="slide" id="s6">
+  <div class="mtop">
+    <div class="mico">🏛️</div>
+    <div><div class="lbl ap">Method #3</div><div class="mname">Lending &amp; Borrowing</div><div class="meli">Lend crypto to earn interest — or borrow against yours without selling it. You're the bank now.</div></div>
+    <div style="margin-left:auto"><span class="tag tp">Supply 1–15% · Borrow 2–20%</span></div>
+  </div>
+  <div class="g2" style="flex:1">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="how"><h4>How it works</h4><ul><li><strong>Supply:</strong> deposit USDC/ETH → earn interest automatically</li><li><strong>Borrow:</strong> deposit collateral → borrow up to your limit</li><li>Your <span class="ar">Health Factor</span> (collateral value ÷ debt — must stay above 1.0) — hit 1.0 and you get liquidated</li></ul></div>
+      <div class="card" style="background:rgba(255,71,87,.06);border-color:rgba(255,71,87,.2)">
+        <div style="font-size:15px;color:var(--red);font-weight:700;margin-bottom:5px">🚨 LIQUIDATION = your collateral is seized automatically</div>
+        <div style="font-size:15px;color:#ffb3ba">Price drops → health hits 1.0 → protocol takes your collateral. Instantly.</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="rsk"><h4>Main risks</h4><ul><li>😴 <strong>Silent liquidation:</strong> health factor can hit 1.0 while you sleep — collateral seized automatically, no warning, no grace period</li><li>🎢 <strong>Variable borrow rate:</strong> rates can jump from 3% to 30%+ overnight — what was profitable yesterday bleeds money by morning</li><li>🐛 <strong>Smart contract exploit:</strong> Aave, Compound, and others have had close calls — a bug can drain all supplied funds instantly</li></ul></div>
+      <div class="mon"><h4>📡 Monitor (CRITICAL)</h4><p>Health factor can go from safe to 1.0 while you sleep. Real-time alerts are essential.</p></div>
+      <div class="joke">🏥 I was liquidated. <strong>Three separate times.</strong> Third time I didn't notice for <strong>weeks.</strong> Stablecoins worth a fraction of my original ETH, as of course ETH decided to pump. This experience sparked an idea. <strong>You'll hear about it at the end.</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: LP AMM -->
+<div class="slide" id="s7">
+  <div class="mtop">
+    <div class="mico">🌊</div>
+    <div><div class="lbl ag">Method #4</div><div class="mname">Liquidity Providing (LP)</div><div class="meli">Put two tokens into a DEX (decentralised exchange — no company, just code) pool. Every trade through it pays you a fee. You become the exchange.</div></div>
+    <div style="margin-left:auto"><span class="tag tg">~5–50%+ fee APR</span></div>
+  </div>
+  <div class="g2" style="flex:1">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="how"><h4>How it works</h4><ul><li>Deposit equal value of 2 tokens (e.g. ETH + USDC)</li><li>Traders swap through your pool — every swap pays you a cut of traders fees</li><li>Withdraw anytime, no lock-up</li></ul></div>
+      <div class="card" style="font-size:14px;color:var(--muted)">Used on: Uniswap V2, SushiSwap, and most DEXes</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="rsk"><h4>Main risks</h4><ul><li>🫠 <strong>Impermanent Loss (IL):</strong> if ETH pumps 2× while you're in an ETH/USDC pool, the AMM (pool's pricing algorithm) sells your ETH as it rises — you end up with less ETH than if you'd just held it</li><li>🧮 <strong>Fees ≠ profit:</strong> you can earn 50% APR in fees and still withdraw less than you deposited once IL is factored in</li><li>🏃 <strong>Rug pulls &amp; exploits:</strong> anonymous devs can drain the pool and vanish — your position goes to zero with no recourse</li></ul></div>
+      <div class="mon"><h4>📡 Monitor</h4><p>Track real APR vs IL. Many "profitable" LPs are net negative once you do the maths.</p></div>
+      <div class="joke">🌊 LPd an ETH/altcoin pool for the "amazing" APR. Altcoin did a 10×. My "impermanent" loss was <strong>extremely permanent.</strong> The fees covered about 3 lattes.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: CONCENTRATED LP -->
+<div class="slide" id="s8">
+  <div class="mtop">
+    <div class="mico">🎯</div>
+    <div><div class="lbl ab">Method #5</div><div class="mname">Concentrated LP</div><div class="meli">LP within a price range for way more fees — but if price leaves the range, you earn absolutely nothing.</div></div>
+    <div style="margin-left:auto"><span class="tag tb">Up to 100× efficiency</span></div>
+  </div>
+  <div class="g2" style="flex:1">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="how"><h4>How it works</h4><ul><li>Set a price range (e.g. ETH $2,000–$2,500)</li><li>Price IN range → massive amplified fees</li><li>Price OUT of range → zero fees + 100% in worst token</li></ul></div>
+      <div class="card" style="font-size:14px;color:var(--muted)">Used on: Uniswap V3, Ambient, Maverick, Izumi</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="rsk"><h4>Main risks</h4><ul><li>💀 <strong>Dead position:</strong> price leaves your range → zero fees AND the AMM rebalances you 100% into whichever token is performing worse</li><li>🔄 <strong>Tight range = constant maintenance:</strong> higher fees when in range, but any market move kicks you out — forcing rebalancing and gas spend repeatedly</li><li>⛽ <strong>Gas costs:</strong> each repositioning costs real money — on mainnet Ethereum $20–$100+ per adjustment, which can easily erase weeks of fees</li></ul></div>
+      <div class="mon"><h4>📡 Monitor (ESPECIALLY IMPORTANT)</h4><p>You need an alert the moment you go out of range. Dead positions cost you silently.</p></div>
+      <div class="joke">🎯 Set a tight range. Left range in 6 hours. Forgot for <strong>3 weeks.</strong> Zero fees. 100% in the losing token. Perfectly concentrated. <strong>Just not in the way I wanted.</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: YIELD FARMING -->
+<div class="slide" id="s9">
+  <div class="mtop">
+    <div class="mico">🌾</div>
+    <div><div class="lbl ay">Method #6</div><div class="mname">Yield Farming</div><div class="meli">LP in a pool AND earn bonus reward tokens on top. Very high APRs. Usually a red flag, not a feature.</div></div>
+    <div style="margin-left:auto"><span class="tag ty">5% → "10,000% APR" 🚩</span></div>
+  </div>
+  <div class="g2" style="flex:1">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="how"><h4>How it works</h4><ul><li>Provide liquidity → get LP tokens (receipts proving your share of the pool)</li><li>Stake LP tokens in a "farm" → earn extra reward tokens</li><li>Autocompounders (Beefy) reinvest rewards automatically</li></ul></div>
+      <div class="card" style="font-size:14px;color:var(--muted)">Used on: Curve, Convex, Beefy, Pendle, and hundreds of farms</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="rsk"><h4>Main risks</h4><ul><li>🖨️ <strong>Reward inflation:</strong> the protocol prints its own token as yield — more issued daily = price tanks — 10,000% APR on a token worth $0 is $0</li><li>🏃 <strong>Rug pull:</strong> anonymous team drains all liquidity in one transaction and disappears — funds are unrecoverable and it happens in seconds</li><li>🎲 <strong>Double loss:</strong> your LP loses to impermanent loss AND the reward token crashes simultaneously — both legs of the trade lose at once</li></ul></div>
+      <div class="mon"><h4>📡 Monitor</h4><p>Track the reward token price. That "1,000% APR" assumes the reward token holds value. Spoiler: it won't.</p></div>
+      <div class="joke">🌾 Farmed a token at 4,000% APR. Harvested 50,000 tokens/week. Token went from $0.001 to $0.0000003. I had technically farmed a lot. Financially, I had performed <strong>artisanal poverty.</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10: LOOPING -->
+<div class="slide" id="s10">
+  <div class="mtop">
+    <div class="mico">🔄</div>
+    <div><div class="lbl ao">Method #7</div><div class="mname">Looping</div><div class="meli">Borrow → buy more → deposit → borrow again. Amplify a yield spread — and everything that can go wrong.</div></div>
+    <div style="margin-left:auto"><span class="tag to">Amplified yield (+ loss)</span></div>
+  </div>
+  <div class="g2" style="flex:1">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="how"><h4>How it works</h4><ul><li>Deposit stETH → borrow ETH → swap to stETH → deposit again</li><li>Repeat until you've built a 3–5× leveraged position (leverage = borrowed money amplifying your exposure — gains and losses both multiply)</li><li>If stETH yields 4% and borrow costs 2% → the spread gets amplified</li></ul></div>
+      <div class="card" style="font-size:14px;color:var(--muted)">Used with: DeFi Saver, Instadapp, or manually on Aave/Morpho</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="rsk"><h4>Main risks</h4><ul><li>🎡 <strong>Cascading liquidation:</strong> at 4× leverage, a 10% price drop hits like a 40% loss — small moves can wipe your entire position instantly</li><li>💔 <strong>De-peg risk:</strong> if stETH trades below ETH, your collateral value falls while your debt stays the same — health factor collapses fast</li><li>🩸 <strong>Negative carry:</strong> if borrow rate spikes above stETH yield, the spread that made the loop profitable disappears — you now pay to hold the position</li></ul></div>
+      <div class="mon"><h4>📡 Monitor (CRITICAL)</h4><p>Leverage multiplies health factor sensitivity. A 5% move can liquidate a 5× loop.</p></div>
+      <div class="joke">🔄 Looped stETH 4×. stETH de-pegged <em>slightly.</em> Health factor critical before I'd finished my morning coffee. Unwound at a loss. The loss was also <strong>4× amplified. Leverage works both ways. Apparently.</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11: LEVERAGED FARMING -->
+<div class="slide" id="s11">
+  <div class="mtop">
+    <div class="mico">⚡</div>
+    <div><div class="lbl ar">Method #8</div><div class="mname">Leveraged Yield Farming</div><div class="meli">Borrow extra capital to make a bigger LP position. More fees — also more IL, also liquidation risk. Fun!</div></div>
+    <div style="margin-left:auto"><span class="tag tr">High risk / High reward</span></div>
+  </div>
+  <div class="g2" style="flex:1">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="how"><h4>How it works</h4><ul><li>You have $1,000 of your own. You deposit it as collateral, then borrow $2,000 more from the protocol</li><li>You deploy the full $3,000 into an LP position — earning fees on 3× the capital you actually own</li><li>If fees cover the borrow cost: great. But IL and losses are also 3× — it cuts both ways</li></ul></div>
+      <div class="card" style="font-size:14px;color:var(--muted)">Used on: Alpha Homora, Gearbox Protocol</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="rsk"><h4>Main risks</h4><ul><li>📢 <strong>Amplified IL:</strong> borrowed capital means impermanent loss scales with your leverage — a 3× position has 3× the IL exposure of a normal LP</li><li>🤖 <strong>Auto-liquidation:</strong> protocol seizes your LP position automatically when debt ratio exceeds the limit — usually at the worst possible market moment</li><li>💸 <strong>Negative carry:</strong> borrow rates can spike above LP fee income overnight — you're silently losing money while appearing to be productive</li></ul></div>
+      <div class="mon"><h4>📡 Monitor</h4><p>Track debt ratio and net APR (fees minus borrow cost minus IL) in real time.</p></div>
+      <div class="joke">⚡ Explained this to my mum. She said "sounds like borrowing from one bank to put in another bank that might be on fire." <strong>She wasn't wrong. I did it anyway. The bank was on fire.</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12: STABLECOIN YIELD -->
+<div class="slide" id="s12">
+  <div class="mtop">
+    <div class="mico">💵</div>
+    <div><div class="lbl ab">Method #9</div><div class="mname">Stablecoin Yield</div><div class="meli">Earn yield on USD-pegged tokens. Lower volatility — not zero risk. "Stable" is doing a lot of heavy lifting here.</div></div>
+    <div style="margin-left:auto"><span class="tag tb">~4–25% APY</span></div>
+  </div>
+  <div class="g2" style="flex:1">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="how"><h4>How it works</h4><ul><li>Lend USDC/USDT/DAI on Aave → earn supply interest</li><li>LP stablecoin pairs on Curve → earn fees with minimal IL</li><li>RWA (Real World Asset) protocols (Maker, Ondo) → earn T-bill (US treasury bond) yields on-chain</li></ul></div>
+      <div class="card" style="font-size:14px;color:var(--muted)">✅ No price volatility &nbsp;·&nbsp; ✅ Great "parking" yield &nbsp;·&nbsp; ✅ Easy to compound</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="rsk"><h4>Main risks</h4><ul><li>💔 <strong>De-peg:</strong> USDC hit $0.87 during the SVB collapse — your "stable" $10,000 became $8,700 overnight. UST hit $0 in 2022, wiping out billions</li><li>💣 <strong>Protocol exploits:</strong> Curve lost $70M in 2023 via a compiler bug — smart contract risk exists even in battle-tested protocols</li><li>🏛️ <strong>Centralised control:</strong> Circle (USDC) and Tether (USDT) can blacklist any wallet — your funds can be frozen without warning or recourse</li></ul></div>
+      <div class="mon"><h4>📡 Monitor</h4><p>Track the stablecoin peg in real time — especially if used as collateral.</p></div>
+      <div class="joke">💵 Put $5,000 USDC in a vault before the SVB bank run. USDC hit $0.87. Not technically a loss — just a <strong>very educational weekend</strong> and a new appreciation for anxiety.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13: PERPS -->
+<div class="slide" id="s13">
+  <div class="mtop">
+    <div class="mico">📈</div>
+    <div><div class="lbl ap">Method #10</div><div class="mname">Perps &amp; Leverage Trading</div><div class="meli">Perpetual contracts — no-expiry price bets using up to 50× leverage. Unlimited upside. Also unlimited downside. Usually just downside.</div></div>
+    <div style="margin-left:auto"><span class="tag tr">Unlimited both ways 💀</span></div>
+  </div>
+  <div class="g2" style="flex:1">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="how"><h4>How it works</h4><ul><li>Open a leveraged long (bet price rises) or short (bet price falls) on crypto — GMX, Hyperliquid, dYdX</li><li>10× leverage = 10% move against you → fully liquidated</li><li>Pay/receive a funding rate (recurring fee keeping the perp price anchored to the real asset) to hold the position</li></ul></div>
+      <div class="card" style="font-size:14px;color:var(--muted)">✅ Hedge other positions &nbsp;·&nbsp; ✅ Earn funding rate &nbsp;·&nbsp; ✅ Profit without a price bet</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="rsk"><h4>Main risks</h4><ul><li>⚡ <strong>Instant liquidation:</strong> 10× leverage means a 10% adverse move wipes your entire margin — position closed automatically, no warning, no appeal</li><li>🦈 <strong>Liquidation hunting:</strong> market makers know where liquidations cluster — price often spikes just enough to trigger them, then immediately recovers</li><li>🔄 <strong>Funding rate flip:</strong> what started as earning a rate can flip to paying one — your "passive" trade becomes a cash-burning position overnight</li></ul></div>
+      <div class="mon"><h4>📡 Monitor</h4><p>Watch your liquidation price at all times. A leveraged position left alone is a gift to the liquidators.</p></div>
+      <div class="joke">📈 Opened a 10× long. Went to make dinner. ETH dropped 11% in 40 minutes. <strong>Came back to cold pasta and no ETH. The pasta survived. The portfolio did not.</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 14: AIRDROPS -->
+<div class="slide" id="s14">
+  <div class="mtop">
+    <div class="mico">🪂</div>
+    <div><div class="lbl ay">Bonus Method</div><div class="mname">Airdrop Farming</div><div class="meli">Use new protocols early, get free tokens when they launch. The word "free" is doing a lot of work here.</div></div>
+    <div style="margin-left:auto"><span class="tag ty">Free tokens (maybe)</span></div>
+  </div>
+  <div class="g2" style="flex:1">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="how"><h4>How it works</h4><ul><li>Use a new protocol early → earn "points" or usage history</li><li>Protocol launches token → distributes to early users</li><li>Famous examples: Uniswap $UNI, Arbitrum $ARB, ENS</li></ul></div>
+      <div class="card" style="font-size:14px;color:var(--muted)">✅ Earn on top of existing strategies &nbsp;·&nbsp; ✅ Some worth thousands</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="rsk"><h4>Main risks</h4><ul><li>📉 <strong>Launch dump:</strong> early farmers, VCs, and insiders all unlock at TGE (token launch day) and sell simultaneously — token price can drop 80–90% within hours of launch</li><li>🚫 <strong>Sybil filter:</strong> protocols flag "suspicious" wallets and exclude them from the drop — months of effort, zero reward, no appeal process</li><li>⏰ <strong>Opportunity cost:</strong> your funds earn nothing for months while the protocol may delay, change terms, or never launch a token at all</li></ul></div>
+      <div class="mon"><h4>📡 Monitor</h4><p>Get instant alerts when tokens land — first movers sell at launch price, not 3 days later.</p></div>
+      <div class="joke">🪂 Farmed a protocol 6 months. Token launched at $2.00. By morning: $0.12. Earned <strong>$47 for 200 hours of work. That's $0.235/hour. McDonald's was hiring.</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 15: RISK TABLE -->
+<div class="slide" id="s15">
+  <div class="big" style="margin-bottom:6px">Risk at a Glance <span class="ar">⚠</span></div>
+  <div class="sub" style="margin-bottom:14px">Every method, every risk, and my <span class="ao">personal track record</span></div>
+  <div class="sb">
+    <table class="rt">
+      <thead><tr><th>Method</th><th>Risk</th><th>Biggest Danger</th><th style="color:var(--orange)">My Record 🏆</th></tr></thead>
+      <tbody>
+        <tr><td class="m">Staking</td><td><span class="rl rlow">Low</span></td><td>Token price crashes, rewards worthless</td><td><span class="ltick">✓</span><span class="lnote">Earned $0.47. Token: $0.</span></td></tr>
+        <tr><td class="m">Liquid Staking</td><td><span class="rl rlow">Low–Med</span></td><td>De-peg while using as collateral</td><td><span class="ltick">✓</span><span class="lnote">stETH de-pegged. "Minimal risk" they said.</span></td></tr>
+        <tr><td class="m">Lending / Supply</td><td><span class="rl rlow">Low</span></td><td>Protocol exploit, utilisation lock</td><td><span class="ltick">✓</span><span class="lnote">Funds locked during a crash. Naturally.</span></td></tr>
+        <tr><td class="m">Borrowing</td><td><span class="rl rmed">Medium</span></td><td><strong style="color:var(--red)">LIQUIDATION</strong> — health factor &lt; 1.0</td><td><span class="ltick">✓</span><span class="lnote">Liquidated 3×. Didn't notice for weeks.</span></td></tr>
+        <tr><td class="m">LP / AMM</td><td><span class="rl rmed">Medium</span></td><td>Impermanent loss wipes your fees</td><td><span class="ltick">✓</span><span class="lnote">Held 100% of the loser token.</span></td></tr>
+        <tr><td class="m">Concentrated LP</td><td><span class="rl rhi">High</span></td><td>Out of range = zero fees + full IL</td><td><span class="ltick">✓</span><span class="lnote">Out of range 3 weeks. Zero fees.</span></td></tr>
+        <tr><td class="m">Yield Farming</td><td><span class="rl rhi">High</span></td><td>Reward token inflates and crashes</td><td><span class="ltick">✓</span><span class="lnote">4,000% APR → artisanal poverty.</span></td></tr>
+        <tr><td class="m">Looping</td><td><span class="rl rhi">High</span></td><td>Cascading liquidation at leverage</td><td><span class="ltick">✓</span><span class="lnote">4× leverage. Loss also 4×. Who knew.</span></td></tr>
+        <tr><td class="m">Leveraged Farming</td><td><span class="rl rdg">Degen</span></td><td>IL + liquidation + negative carry</td><td><span class="ltick">✓</span><span class="lnote">The bank was on fire. Went in anyway.</span></td></tr>
+        <tr><td class="m">Stablecoin Yield</td><td><span class="rl rmed">Medium</span></td><td>De-peg, protocol exploit</td><td><span class="ltick">✓</span><span class="lnote">USDC hit $0.87. "Stable" is a strong word.</span></td></tr>
+        <tr><td class="m">Perps / Leverage</td><td><span class="rl rdg">Degen</span></td><td>Liquidated by a 10% move</td><td><span class="ltick">✓</span><span class="lnote">Liquidated making dinner. Cold pasta.</span></td></tr>
+        <tr><td class="m">Airdrops</td><td><span class="rl rlow">Low–Med</span></td><td>6 months effort, token dumps at launch</td><td><span class="ltick">✓</span><span class="lnote">$47 for 200 hours. $0.235/hr.</span></td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px;font-size:18px;color:var(--orange);font-style:italic;text-align:center">✓ = personally lost money here &nbsp;·&nbsp; Score: 12 methods tried, 12 losses. A <strong>perfect</strong> record.</div>
+  </div>
+</div>
+
+<!-- SLIDE 16: WHY MONITOR -->
+<div class="slide" id="s16">
+  <div class="big" style="margin-bottom:6px">Monitoring: <span class="ag">the constant always missing</span></div>
+  <div class="sub" style="margin-bottom:20px">Every loss you heard today had one thing in common — I wasn't watching</div>
+  <div class="g2" style="margin-bottom:16px">
+    <div class="rsk" style="padding:20px 24px">
+      <h4 style="font-size:18px;margin-bottom:14px">😴 Without monitoring</h4>
+      <ul style="display:flex;flex-direction:column;gap:10px">
+        <li style="font-size:clamp(18px,1.8vw,24px)">Health factor hits 1.0 at 3am → liquidated</li>
+        <li style="font-size:clamp(18px,1.8vw,24px)">LP exits range → zero fees for weeks</li>
+        <li style="font-size:clamp(18px,1.8vw,24px)">Borrow rate spikes → position bleeds silently</li>
+        <li style="font-size:clamp(18px,1.8vw,24px)">Airdrop lands → you sell 3 days late at -80%</li>
+      </ul>
+    </div>
+    <div class="mon" style="padding:20px 24px">
+      <h4 style="font-size:18px;margin-bottom:14px">🟢 With monitoring</h4>
+      <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px">
+        <li style="font-size:clamp(18px,1.8vw,24px);color:#aaffd6">→ Health alert → add collateral in time</li>
+        <li style="font-size:clamp(18px,1.8vw,24px);color:#aaffd6">→ Range alert → rebalance before dead zone</li>
+        <li style="font-size:clamp(18px,1.8vw,24px);color:#aaffd6">→ Rate change → exit before it costs you</li>
+        <li style="font-size:clamp(18px,1.8vw,24px);color:#aaffd6">→ Airdrop alert → sell at launch, not the crash</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card" style="text-align:center;padding:18px 24px">
+    <div style="font-size:clamp(22px,2.5vw,28px);font-weight:700;line-height:1.6">DeFi runs <span class="ag">24/7/365.</span> Your brain doesn't.<br><span style="color:var(--muted);font-weight:400;font-size:clamp(18px,2vw,22px)">Which brings me to what I've been building for 3.5 years since I ain't got much crypto left to play with… <strong style="color:var(--text)"></strong></span></div>
+  </div>
+</div>
+
+<!-- SLIDE 17: DEFIRILLA -->
+<div class="slide" id="s17" style="background:radial-gradient(ellipse at 20% 50%,rgba(0,255,136,.08) 0%,transparent 55%),radial-gradient(ellipse at 85% 30%,rgba(0,200,255,.06) 0%,transparent 50%),var(--bg)">
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
+    <div style="font-size:42px"><img src="https://defirilla.com/defirilla.png" alt="DefiRilla" style="height:2em; vertical-align:middle;"></div>
+    <div>
+      <div class="big" style="font-size:clamp(26px,4vw,50px)">Introducing <span class="ag">DefiRilla</span></div>
+      <div class="sub" style="margin-top:4px">Set &amp; forget DeFi monitoring — built after losing everything. So you don't have to.</div>
+    </div>
+    <div style="margin-left:auto"><div class="url">🌐 defirilla.com</div></div>
+  </div>
+  <div class="fg">
+    <div class="ft"><div class="fi">⚡</div><h4>18-Second Setup</h4><p>Paste your wallet address. No connection. No signing. Done.</p></div>
+    <div class="ft"><div class="fi">🔒</div><h4>100% Private</h4><p>Public on-chain data only. Anonymous email alerts. No link to your identity.</p></div>
+    <div class="ft"><div class="fi">🌐</div><h4>All Chains, All Protocols</h4><p>Auto-discovers every position across all EVM chains. No manual setup per position.</p></div>
+    <div class="ft"><div class="fi">🏥</div><h4>Health Factor Alerts</h4><p>Real-time alerts the moment your health factor moves. The alert I needed 3 liquidations ago.</p></div>
+    <div class="ft"><div class="fi">🎯</div><h4>LP Range Alerts</h4><p>Instant alert when your LP enters or exits range. Never earn zero fees for weeks again.</p></div>
+    <div class="ft"><div class="fi">📊</div><h4>Real Yield Calculator</h4><p>Your actual APR including borrow costs and IL — not the inflated number on the UI.</p></div>
+    <div class="ft"><div class="fi">🪂</div><h4>Airdrop Alerts</h4><p>Know the instant tokens land. Sell before the crowd, not after.</p></div>
+    <div class="ft"><div class="fi">💰</div><h4>Take-Profit Reminders</h4><p>Alerts when positions pump vs your benchmark. Do better than just holding.</p></div>
+    <div class="ft"><div class="fi">✅</div><h4>Trusted by Swell</h4><p>Recognised by Swell Blockchain. Built by a real DeFi user who lost real money so you don't have to.</p></div>
+  </div>
+</div>
+
+<!-- SLIDE 18: END -->
+<div class="slide" id="send">
+  <div class="fbg" style="top:20px;left:20px"><img src="https://defirilla.com/defirilla.png" alt="DefiRilla" style="height:1em; vertical-align:middle;"></div>
+  <div class="fbg" style="bottom:80px;right:20px">📡</div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:18px;max-width:800px;text-align:center">
+    <div style="font-size:60px"><img src="https://defirilla.com/defirilla.png" alt="DefiRilla" style="height:3em; vertical-align:middle;"></div>
+    <div style="font-size:clamp(28px,5vw,60px);font-weight:900;line-height:1.1">DeFi is dangerous.<br><span class="ag">Monitoring makes it survivable.</span></div>
+    <div style="font-size:clamp(18px,2vw,24px);color:var(--muted);max-width:700px;line-height:1.8">I've been liquidated, out-ranged, IL'd, farmed worthless tokens, and eaten cold pasta.<br><strong style="color:var(--text)">DefiRilla</strong> exists so you don't repeat my very expensive education.</div>
+    <div class="url" style="font-size:22px;padding:13px 28px">🌐 defirilla.com</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <span class="tag tg">Free to start</span><span class="tag tb">No wallet connection</span><span class="tag to">18 seconds setup</span><span class="tag tp">All EVM chains</span>
+    </div>
+    <div style="font-size:18px;color:var(--muted)">Questions? I'm right here — short on money, rich in painful experience. 😅<br><span style="font-size:16px">NFA. DYOR. Please don't blame me if you lose money. I already feel bad enough about my own.</span></div>
+  </div>
+</div>
+
+<div id="nav">
+  <button onclick="prev()">← Prev</button>
+  <span id="counter">Slide 1 / 18</span>
+  <button onclick="next()">Next →</button>
+</div>
+
+<script>
+  const slides=document.querySelectorAll('.slide');
+  const names=['Title','About Me','What is DeFi?','#1 Staking','#2 Liquid Staking','#3 Lending & Borrowing','#4 LP / AMM','#5 Concentrated LP','#6 Yield Farming','#7 Looping','#8 Leveraged Farming','#9 Stablecoin Yield','#10 Perps','Bonus: Airdrops','Risk Table','Why Monitor?','DefiRilla','Closing'];
+  let cur=0;
+  function show(n){slides[cur].classList.remove('active');cur=(n+slides.length)%slides.length;slides[cur].classList.add('active');document.getElementById('counter').textContent=`Slide ${cur+1} / ${slides.length}  ·  ${names[cur]}`;document.getElementById('pb').style.width=((cur+1)/slides.length*100)+'%';}
+  function next(){show(cur+1);}
+  function prev(){show(cur-1);}
+  document.addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();next();}else if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();prev();}});
+  let tx=0;
+  document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;});
+  document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50)d<0?next():prev();});
+  document.getElementById('pb').style.width=(1/slides.length*100)+'%';
+</script>
+</body>
+</html>
