@@ -559,7 +559,7 @@ Trusted by Swell Blockchain
         <div class="policy-section">
             <h2>1. Who We Are &amp; Data Controller Identity</h2>
             <p>This Privacy Policy applies to the website, platform, and alerting services accessible via <a href="https://defirilla.com/" target="_blank">defirilla.com</a> (collectively, the "Platform"), operated by Brightstart Nominees PTY LTD trading as DefiRilla (referred to as "DefiRilla," "we," "our," or "us"), registered in Australia at 102 Victoria Street, Carlton, Melbourne, Victoria 3053, Australia.</p>
-            <p>For the purposes of applicable data protection laws, including the EU General Data Protection Regulation (GDPR) and the Australian Privacy Act 1988 (Cth), Brightstart Nominees PTY LTD is responsible for the processing of personal information described in this Policy and acts as a data controller where applicable under relevant privacy laws. If you have questions regarding this Privacy Policy or our data practices, contact our Privacy Contact at <a href="mailto:support@defirilla.com">support@defirilla.com</a>.</p>
+            <p>For the purposes of applicable data protection laws, including the EU General Data Protection Regulation (GDPR) and the Australian Privacy Act 1988 (Cth), Brightstart Nominees PTY LTD is responsible for the processing of personal information described in this Policy and acts as a data controller where applicable under relevant privacy laws. If you have questions regarding this Privacy Policy or our data practices, contact our Privacy Contact at <a href="#" class="email-protect" data-user="support" data-domain="defirilla.com" rel="nofollow">support [at] defirilla.com</a>.</p>
             <p>The GDPR and UK GDPR apply to DefiRilla only to the extent required by their respective territorial scopes, including where DefiRilla offers goods or services to individuals in the European Economic Area or the United Kingdom, or monitors the behaviour of individuals located there. Where the GDPR or UK GDPR applies, DefiRilla will comply with the requirements applicable to the relevant processing. References to GDPR rights and obligations in this Policy apply only where and to the extent the GDPR or UK GDPR is legally applicable to the relevant processing.</p>
         </div>
 
@@ -755,7 +755,7 @@ Trusted by Swell Blockchain
                 <li><strong>Complaints Handling:</strong> Lodge an enquiry or complaint regarding privacy handling directly with us.</li>
             </ul>
 
-            <p>We respond to privacy requests within the timeframe required by applicable law. Under the GDPR and UK GDPR, we generally respond within one month and may extend that period by up to two further months where permitted for complex or numerous requests; we will notify you of any extension and the reason for it. For Australian requests, we will respond within a reasonable period in accordance with the Privacy Act 1988 (Cth) and applicable Australian Privacy Principles. We may need to verify your identity before processing a request. To exercise your rights, contact us at <a href="mailto:support@defirilla.com">support@defirilla.com</a>.</p>
+            <p>We respond to privacy requests within the timeframe required by applicable law. Under the GDPR and UK GDPR, we generally respond within one month and may extend that period by up to two further months where permitted for complex or numerous requests; we will notify you of any extension and the reason for it. For Australian requests, we will respond within a reasonable period in accordance with the Privacy Act 1988 (Cth) and applicable Australian Privacy Principles. We may need to verify your identity before processing a request. To exercise your rights, contact us at <a href="#" class="email-protect" data-user="support" data-domain="defirilla.com" rel="nofollow">support [at] defirilla.com</a>.</p>
         </div>
 
         <!-- Section 13 -->
@@ -768,7 +768,7 @@ Trusted by Swell Blockchain
                 <li><strong>No Sale or Sharing of Personal Information:</strong> DefiRilla does not sell your personal information or share it for cross-context behavioral advertising (as defined under applicable law).</li>
                 <li><strong>Non-Discrimination:</strong> We will not discriminate against you (such as denying services or altering service quality) for exercising any privacy rights available to you.</li>
             </ul>
-            <p>To exercise applicable US privacy rights, contact us at <a href="mailto:support@defirilla.com?subject=US%20Privacy%20Request">support@defirilla.com</a> with the subject line "US Privacy Request."</p>
+            <p>To exercise applicable US privacy rights, contact us at <a href="#" class="email-protect" data-user="support" data-domain="defirilla.com" data-subject="US Privacy Request" rel="nofollow">support [at] defirilla.com</a> with the subject line "US Privacy Request."</p>
         </div>
 
         <!-- Section 14 -->
@@ -801,7 +801,7 @@ Trusted by Swell Blockchain
             <h2>18. Complaints Handling Process</h2>
             <p>If you believe DefiRilla has processed your personal information in violation of applicable privacy laws or this Policy:</p>
             <ul class="bullet-list">
-                <li><strong>Internal Review:</strong> Contact our Privacy Contact directly at <a href="mailto:support@defirilla.com">support@defirilla.com</a>. We will acknowledge and investigate your complaint within a reasonable period.</li>
+                <li><strong>Internal Review:</strong> Contact our Privacy Contact directly at <a href="#" class="email-protect" data-user="support" data-domain="defirilla.com" rel="nofollow">support [at] defirilla.com</a>. We will acknowledge and investigate your complaint within a reasonable period.</li>
                 <li><strong>Regulatory Escalation:</strong> If you are unsatisfied with our response, you retain the right to lodge a complaint with your local regulatory authority:
                     <ul class="nested-bullet-list">
                         <li><strong>Australia:</strong> Office of the Australian Information Commissioner (OAIC) at <a href="https://www.oaic.gov.au/" target="_blank">www.oaic.gov.au</a>.</li>
@@ -821,7 +821,7 @@ Trusted by Swell Blockchain
         <div class="policy-section">
             <h2>20. Contact Information</h2>
             <p>For all privacy-related questions, data requests, or complaints:</p>
-            <p><strong>Support Email:</strong> <a href="mailto:support@defirilla.com">support@defirilla.com</a><br/>
+            <p><strong>Support Email:</strong> <a href="#" class="email-protect" data-user="support" data-domain="defirilla.com" rel="nofollow">support [at] defirilla.com</a><br/>
             <strong>Registered Address:</strong> 102 Victoria Street, Carlton, Melbourne, Victoria 3053, Australia<br/>
             <strong>Website:</strong> <a href="https://defirilla.com/" target="_blank">defirilla.com</a></p>
         </div>
@@ -860,6 +860,20 @@ document.addEventListener('click', function(event) {
         menu.classList.remove('active');
     }
 });
+
+// Protect email from SEO harvesting by assembling at runtime
+(function() {
+    document.querySelectorAll('.email-protect').forEach(function(el) {
+        const user = el.getAttribute('data-user');
+        const domain = el.getAttribute('data-domain');
+        const subject = el.getAttribute('data-subject');
+        if (user && domain) {
+            const email = user + '@' + domain;
+            el.textContent = email;
+            el.href = 'mailto:' + email + (subject ? '?subject=' + encodeURIComponent(subject) : '');
+        }
+    });
+})();
 </script>
 
 </body>
