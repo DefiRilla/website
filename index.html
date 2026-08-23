@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <meta name="robots" content="noindex, nofollow"> -->
     <title>DeFiRilla - Set & Forget DeFi Wallet Health, LP & Yield Monitoring Notification Alerts</title>
-    
+
 <style>
-    
+
 /* Navigation Bar Styles */
 .navbar {
     position: fixed;
@@ -372,6 +372,26 @@ button:hover {
     display: block;
 }
 
+/* Tab Footer Styles */
+.tab-footer {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 165, 0, 0.2);
+    text-align: center;
+    font-size: 14px;
+}
+
+.tab-footer a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.tab-footer a:hover {
+    color: orange;
+    text-decoration: underline;
+}
+
 </style>
     
 </head>
@@ -387,6 +407,7 @@ button:hover {
             <li><a href="#" onclick="showSection('alerts'); return false;">Live Alerts</a></li>
             <li><a href="#" onclick="showSection('motivation'); return false;">Motivation</a></li>
             <li><a href="#" onclick="showSection('contact'); return false;">Contact</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
         </ul>
         <div class="menu-toggle" id="menu-toggle">
             <span></span>
@@ -437,6 +458,9 @@ Trusted by Swell Blockchain
                 <button class="nav-button" onclick="showSection('request')">Monitor Your Wallet's DeFi</button>
                 <!-- <button class="nav-button" onclick="showSection('alerts')">See Live Alerts</button> -->
             </div>
+            <div class="tab-footer">
+                <a href="privacy.html">DefiRilla Privacy Policy</a>
+            </div>
         </div>
 
         <!-- Demo Section -->
@@ -451,22 +475,19 @@ Trusted by Swell Blockchain
                 <button class="nav-button" onclick="showSection('request')">Monitor Your Wallet's DeFi</button>
                 <button class="nav-button" onclick="showSection('alerts')">See Live Alerts</button>
             </div>
+            <div class="tab-footer">
+                <a href="privacy.html">DefiRilla Privacy Policy</a>
+            </div>
         </div>
 
         <!-- Request Section -->
         <div id="request-section" class="content-section">
             <h1>Request DeFi monitoring alerts on your wallet</h1>
-            <p>It takes a 18 seconds to <b>paste your own/anyone's* wallet and monitor ALL the wallet's DeFi positions</b> via Telegram or email notifications (instructions are given how to optionally use a free 100% anonymous email relay service so <b>your wallet cannot be linked to your email</b>)</p>
+            <p>It takes a few seconds to join the waitlist to <b>paste your own/anyone's* wallet and monitor ALL the wallet's DeFi positions</b> via Telegram or email notifications (instructions are given how to optionally use a free 100% anonymous email relay service so <b>your wallet cannot be linked to your email</b>)</p>
             <br/><small>Please only request alerts on your main best wallet with most DeFi yield positions each of at least $100 as our servers cannot scale at this time</small>
             <br/><br/>
             <div id="iframe-container">
-            
-                <button onclick="document.getElementById('iframe-container').innerHTML = `<iframe src='https://docs.google.com/forms/d/e/1FAIpQLSdcEyubSeHfekHZIUF_LxE1EvGr9QPvpyUOxwUiaP6gZCLjnQ/viewform?embedded=true' frameborder='0'></iframe>`">Email - detailed notifications, with explanations and calculations, optionally anonymous</button>
-
-                <br/>&nbsp;&nbsp;OR&nbsp;&nbsp;
-            
-                <button onclick="window.open(`https://t.me/DeFiRillaBot`, `_blank`)">Telegram - simplified notifications</button>
-
+                <button onclick="document.getElementById('iframe-container').innerHTML = `<iframe src='https://docs.google.com/forms/d/e/1FAIpQLSd3YHleiHV5ot88ElcKmLAp8oGFut-WjBg5x07mF73CwXk29w/viewform?embedded=true' frameborder='0'></iframe>`">Request Wallet DeFi yield and health monitoring alerts</button>
             </div>
             <br/><small>* please bear in mind that if you are not familiar with someone else's positions it maybe hard to make sense of their alerts</small>
             
@@ -474,6 +495,9 @@ Trusted by Swell Blockchain
                 <button class="nav-button" onclick="showSection('home')">Features</button>
                 <button class="nav-button" onclick="showSection('demo')">Watch Demo</button>
                 <button class="nav-button" onclick="showSection('alerts')">See Live Alerts</button>
+            </div>
+            <div class="tab-footer">
+                <a href="privacy.html">DefiRilla Privacy Policy</a>
             </div>
         </div>
 
@@ -487,6 +511,9 @@ Trusted by Swell Blockchain
                 <button class="nav-button" onclick="showSection('home')">Features</button>
                 <button class="nav-button" onclick="showSection('request')">Monitor Your Wallet's DeFi</button>
                 <button class="nav-button" onclick="showSection('motivation')">Motivation</button>
+            </div>
+            <div class="tab-footer">
+                <a href="privacy.html">DefiRilla Privacy Policy</a>
             </div>
         </div>
 
@@ -515,6 +542,9 @@ Trusted by Swell Blockchain
                 <button class="nav-button" onclick="showSection('request')">Monitor Your Wallet's DeFi</button>
                 <button class="nav-button" onclick="showSection('contact')">Contact</button>
             </div>
+            <div class="tab-footer">
+                <a href="privacy.html">DefiRilla Privacy Policy</a>
+            </div>
         </div>
 
         <!-- Contact Section -->
@@ -526,6 +556,9 @@ Trusted by Swell Blockchain
                 <button class="nav-button" onclick="showSection('home')">Features</button>
                 <button class="nav-button" onclick="showSection('request')">Monitor Your Wallet's DeFi</button>
                 <button class="nav-button" onclick="showSection('motivation')">Motivation</button>
+            </div>
+            <div class="tab-footer">
+                <a href="privacy.html">DefiRilla Privacy Policy</a>
             </div>
         </div>
     </div>
