@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DefiRilla Privacy Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* Navigation Bar Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(20, 20, 20, 0.95) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 999;
+    padding: 15px 0;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 165, 0, 0.2);
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    padding-right: 180px; /* Space for banner */
+}
+
+.navbar-brand {
+    font-size: 28px;
+    font-weight: bold;
+    color: orange;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand:hover {
+    color: #FFA500;
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 30px;
+}
+
+.navbar-menu li {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-menu li::before {
+    display: none !important;
+}
+
+.navbar-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.navbar-menu a:hover,
+.navbar-menu a.active {
+    color: orange;
+    background-color: rgba(255, 165, 0, 0.1);
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Nav Mobile Responsive */
+@media (max-width: 1060px) {
+    .navbar-container {
+        padding-right: 20px;
+    }
+    
+    .navbar-menu {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(20, 20, 20, 0.98) 100%);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 50px;
+        transition: left 0.3s ease;
+        gap: 20px;
+    }
+
+    .navbar-menu.active {
+        left: 0;
+    }
+
+    .navbar-menu a {
+        font-size: 18px;
+        padding: 15px 20px;
+        width: 80%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .navbar-brand {
+        font-size: 24px;
+    }
+}
+
+/* Add global box-sizing to prevent overflow */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    padding-top: 80px; /* navbar offset */
+    min-height: 100vh;
+    overflow: visible;
+    color: white;
+    background-color: #0b0e14;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('defirilla.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.content {
+    display: block;
+    color: white;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+.box {
+    background-color: rgba(0, 0, 0, 0.65);
+    padding: 45px 50px;
+    border-radius: 12px;
+    text-align: left;
+    width: 1050px;
+    max-width: 100%;
+    margin: 0 auto 40px auto;
+    overflow: visible;
+    border: 1px solid rgba(255, 165, 0, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    line-height: 1.65;
+}
+
+@media (max-width: 768px) {
+    .box {
+        padding: 20px 15px;
+    }
+}
+
+/* Orange diagonal banner */
+.diagonal-banner {
+    position: fixed;
+    top: 60px;
+    right: -55px;
+    width: 270px;
+    height: 40px;
+    background-color: orange;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    font-size: 15px;
+    font-weight: bold;
+    transform: rotate(45deg);
+    z-index: 999;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.diagonal-banner:hover {
+    background-color: #e68900;
+    color: white;
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .diagonal-banner {
+        display: none;
+    }
+}
+
+/* Typography and Policy Styles */
+h1 {
+    color: orange;
+    text-align: center;
+    font-size: 32px;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.last-updated {
+    text-align: center;
+    color: #cccccc;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 35px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 165, 0, 0.2);
+}
+
+.policy-section {
+    margin-bottom: 35px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.policy-section:last-of-type {
+    border-bottom: none;
+}
+
+h2 {
+    color: orange;
+    font-size: 21px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+h3 {
+    color: #ffb833;
+    font-size: 17px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+h4 {
+    color: #ffffff;
+    font-size: 16px;
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+
+p {
+    margin: 10px 0;
+    color: #e0e0e0;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+a {
+    color: #FFA500;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #ffd080;
+}
+
+/* Policy Lists */
+.policy-list {
+    padding: 0;
+    margin: 15px 0;
+    list-style-type: none;
+}
+
+.policy-list > li {
+    position: relative;
+    padding-left: 28px;
+    line-height: 1.55;
+    color: #e0e0e0;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.policy-list > li:last-child {
+    margin-bottom: 0;
+}
+
+.policy-list > li::before {
+    content: "✓";
+    color: orange;
+    font-weight: bold;
+    font-size: 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.bullet-list {
+    padding: 0;
+    margin: 15px 0;
+    list-style-type: none;
+}
+
+.bullet-list > li {
+    position: relative;
+    padding-left: 24px;
+    line-height: 1.55;
+    color: #e0e0e0;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.bullet-list > li:last-child {
+    margin-bottom: 0;
+}
+
+.bullet-list > li::before {
+    content: "•";
+    color: orange;
+    font-size: 20px;
+    position: absolute;
+    left: 4px;
+    top: -2px;
+}
+
+/* Nested lists */
+.bullet-list ul,
+.bullet-list .nested-bullet-list {
+    padding-left: 8px;
+    margin: 10px 0 4px 0;
+    list-style-type: none;
+}
+
+.bullet-list ul > li,
+.bullet-list .nested-bullet-list > li {
+    position: relative;
+    padding-left: 22px;
+    line-height: 1.55;
+    color: #e0e0e0;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.bullet-list ul > li:last-child,
+.bullet-list .nested-bullet-list > li:last-child {
+    margin-bottom: 0;
+}
+
+.bullet-list ul > li::before,
+.bullet-list .nested-bullet-list > li::before {
+    content: "–";
+    color: orange;
+    font-weight: bold;
+    font-size: 15px;
+    position: absolute;
+    left: 4px;
+    top: 0;
+}
+
+/* Sub-card styling for categories */
+.subsection-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid orange;
+    padding: 14px 18px;
+    border-radius: 4px;
+    margin: 14px 0;
+}
+
+.subsection-card h3 {
+    margin-top: 0;
+    color: #FFA500;
+    font-size: 16px;
+}
+
+.subsection-card p {
+    margin: 6px 0;
+}
+
+/* Table Styles for Section 5 */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    margin: 20px 0;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 165, 0, 0.25);
+    background: rgba(0, 0, 0, 0.35);
+}
+
+table.gdpr-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+}
+
+table.gdpr-table th {
+    background: linear-gradient(135deg, rgba(255, 165, 0, 0.25) 0%, rgba(200, 120, 0, 0.2) 100%);
+    color: orange;
+    font-weight: 700;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255, 165, 0, 0.3);
+    white-space: nowrap;
+}
+
+table.gdpr-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    color: #e6e6e6;
+    vertical-align: top;
+    line-height: 1.6;
+}
+
+table.gdpr-table tr:last-child td {
+    border-bottom: none;
+}
+
+table.gdpr-table tr:hover td {
+    background-color: rgba(255, 165, 0, 0.05);
+}
+
+/* Section Navigation / Buttons */
+.section-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 35px;
+    padding-top: 20px;
+}
+
+.nav-button {
+    background-color: rgba(255, 165, 0, 0.85);
+    color: black;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 12px 22px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+}
+
+.nav-button:hover {
+    background-color: orange;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: black;
+    text-decoration: none;
+}
+
+/* Footer link styling */
+.tab-footer {
+    margin-top: 35px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 165, 0, 0.2);
+    text-align: center;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.tab-footer a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.tab-footer a:hover {
+    color: orange;
+    text-decoration: underline;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <a href="index.html" class="navbar-brand">DeFiRilla</a>
+        <ul class="navbar-menu" id="navbar-menu">
+            <li><a href="index.html#demo">Demo</a></li>
+            <li><a href="index.html#request"><b>Monitor Your Wallet's DeFi</b></a></li>
+            <li><a href="index.html#alerts">Live Alerts</a></li>
+            <li><a href="index.html#motivation">Motivation</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="privacy.html" class="active">Privacy Policy</a></li>
+        </ul>
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
+
+<!-- Orange diagonal banner -->
+<a href="https://x.com/swellnetworkio/status/1914253168554447087" target="_blank" class="diagonal-banner">
+Trusted by Swell Blockchain
+</a>
+
+<div class="background"></div>
+
+<div class="content">
+    <div class="box">
+        <h1>DefiRilla Privacy Policy</h1>
+        <div class="last-updated">Last Updated: August 23, 2026</div>
+
+        <!-- Section 1 -->
+        <div class="policy-section">
+            <h2>1. Who We Are &amp; Data Controller Identity</h2>
+            <p>This Privacy Policy applies to the website, platform, and alerting services accessible via <a href="https://defirilla.com/" target="_blank">defirilla.com</a> (collectively, the "Platform"), operated by Brightstart Nominees PTY LTD trading as DefiRilla (referred to as "DefiRilla," "we," "our," or "us"), registered in Australia at 102 Victoria Street, Carlton, Melbourne, Victoria 3053, Australia.</p>
+            <p>For the purposes of applicable data protection laws, including the EU General Data Protection Regulation (GDPR) and the Australian Privacy Act 1988 (Cth), Brightstart Nominees PTY LTD is responsible for the processing of personal information described in this Policy and acts as a data controller where applicable under relevant privacy laws. If you have questions regarding this Privacy Policy or our data practices, contact our Privacy Contact at <a href="mailto:support@defirilla.com">support@defirilla.com</a>.</p>
+            <p>The GDPR and UK GDPR apply to DefiRilla only to the extent required by their respective territorial scopes, including where DefiRilla offers goods or services to individuals in the European Economic Area or the United Kingdom, or monitors the behaviour of individuals located there. Where the GDPR or UK GDPR applies, DefiRilla will comply with the requirements applicable to the relevant processing. References to GDPR rights and obligations in this Policy apply only where and to the extent the GDPR or UK GDPR is legally applicable to the relevant processing.</p>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="policy-section">
+            <h2>2. Platform Overview &amp; Read-Only Architecture</h2>
+            <p>DefiRilla provides a passive, read-only monitoring and alerting tool for decentralized finance (DeFi) positions across EVM-compatible blockchain networks. DefiRilla enables users to receive automated risk notifications (including Health Factor changes, LP active range exits, and yield fluctuations) without requiring non-custodial wallet connections or transaction signatures.</p>
+            <h3>Read-Only Security Commitment</h3>
+            <ul class="policy-list">
+                <li><strong>No Wallet Connections:</strong> DefiRilla will never ask you to connect your Web3 wallet (e.g., MetaMask, Rabby, Coinbase Wallet).</li>
+                <li><strong>No Signatures or Approvals:</strong> DefiRilla never requests transaction signatures, message signing, or smart contract token approvals.</li>
+                <li><strong>Zero Access to Assets or Private Keys:</strong> DefiRilla cannot access, hold, transfer, trade, stake, or manage private keys, seed phrases, or user funds under any circumstances.</li>
+            </ul>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="policy-section">
+            <h2>3. Information We Process</h2>
+            <p>DefiRilla is engineered around the principle of data minimisation. Depending on how you interact with the Platform, we process the following categories of information:</p>
+            
+            <div class="subsection-card">
+                <h3>A. Information Provided by You</h3>
+                <ul class="bullet-list">
+                    <li><strong>Public Wallet Addresses:</strong> Public EVM wallet addresses that you submit for on-chain position monitoring.</li>
+                    <li><strong>Notification Destinations:</strong> Your Telegram Chat ID/username or email address to route alerts to your designated device.</li>
+                </ul>
+            </div>
+
+            <div class="subsection-card">
+                <h3>B. Information Automatically Processed (Usage &amp; Technical Data)</h3>
+                <ul class="bullet-list">
+                    <li><strong>Technical &amp; Server Logs:</strong> Standard server and application error logs, including IP addresses, access timestamps, user-agent details (browser type and OS), and request headers, processed on infrastructure managed by DefiRilla and provided by third-party cloud infrastructure providers for security, system stability, and abuse prevention.</li>
+                    <li><strong>Pseudonymous Analytics:</strong> Usage and traffic metrics collected via Google Analytics to evaluate traffic, usage patterns, and system performance.</li>
+                </ul>
+            </div>
+
+            <div class="subsection-card">
+                <h3>C. Public Blockchain Information</h3>
+                <p>Publicly available, on-chain data associated with submitted wallet addresses, including token balances, borrowing/lending Health Factors, liquidity pool positions, and smart contract interactions.</p>
+                <p>Public blockchain data is obtained from publicly accessible blockchain infrastructure services used by DefiRilla to query and monitor those networks.</p>
+            </div>
+
+            <div class="subsection-card">
+                <h3>D. Raw Blockchain Data vs. DefiRilla Derived Data</h3>
+                <ul class="bullet-list">
+                    <li><strong>Raw On-Chain Data:</strong> Public ledger state that exists independently on decentralized networks.</li>
+                    <li><strong>DefiRilla Derived Data:</strong> Calculations, risk state evaluations, Health Factor alerts, LP active range statuses, and APR tracking generated by our internal monitoring engine.</li>
+                </ul>
+            </div>
+
+            <div class="subsection-card">
+                <h3>E. Sources and Indirect Collection</h3>
+                <p>We collect information directly from you when you submit a wallet address, configure alerts, provide a notification destination or contact us. We also collect information indirectly from public blockchain ledgers and from third-party blockchain infrastructure, RPC and indexing providers used to retrieve on-chain data. These providers may receive wallet addresses, network and query information necessary to return blockchain data. We may also receive information about blockchain addresses or transactions relating to individuals who have not directly interacted with DefiRilla.</p>
+            </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="policy-section">
+            <h2>4. Wallet Re-Identification &amp; Public Blockchain Disclaimer</h2>
+            <p><strong>Pseudonymity Notice:</strong> Public wallet addresses are pseudonymous identifiers. While DefiRilla does not require your legal name or identity, wallet addresses may become re-identifiable when combined with third-party data sources, public social profiles, or notification endpoints.</p>
+            <p><strong>Blockchain Immutability:</strong> Public blockchain networks are decentralized, transparent, and permanent public ledgers. DefiRilla does not control, alter, or erase public blockchain data.</p>
+        </div>
+
+        <!-- Section 5 -->
+        <div class="policy-section">
+            <h2>5. Purposes &amp; Legal Bases for Processing (GDPR Disclosure)</h2>
+            <p>We assess the legal basis for each processing activity separately. Depending on the context, the same category of data may be processed under different legal bases:</p>
+            
+            <div class="table-responsive">
+                <table class="gdpr-table">
+                    <thead>
+                        <tr>
+                            <th>Processing Activity</th>
+                            <th>Categories of Data</th>
+                            <th>GDPR Legal Basis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Delivering Alert Services</strong></td>
+                            <td>Wallet addresses, Telegram ID, Email address</td>
+                            <td><strong>Performance of Contract (GDPR Art. 6(1)(b))</strong> – Necessary to deliver requested alerts.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>System Security &amp; Abuse Prevention</strong></td>
+                            <td>Technical server logs, IP addresses, error logs</td>
+                            <td><strong>Legitimate Interests (GDPR Art. 6(1)(f))</strong> – Protecting internal infrastructure and preventing DDoS/abuse.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Product Analytics &amp; Traffic Analysis</strong></td>
+                            <td>Pseudonymous usage metrics (Google Analytics)</td>
+                            <td><strong>Consent (GDPR Art. 6(1)(a))</strong> – Where Google Analytics is non-essential, we only activate analytics after obtaining the user's affirmative consent.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Legal &amp; Regulatory Compliance</strong></td>
+                            <td>Technical records, correspondence</td>
+                            <td><strong>Legal Obligation (GDPR Art. 6(1)(c))</strong> – Complying with statutory requirements.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Blockchain Monitoring &amp; Derived Risk Data</strong></td>
+                            <td>Wallet addresses submitted by users, public on-chain data, Health Factor, LP and APR calculations</td>
+                            <td><strong>Performance of Contract (GDPR Art. 6(1)(b))</strong> where processing is objectively necessary to provide monitoring requested by the user. <strong>Legitimate Interests (GDPR Art. 6(1)(f))</strong> may apply to blockchain data collection or processing that is not objectively necessary to perform the user’s contract, as well as security, service improvement and processing relating to individuals who are not DefiRilla users, subject to a documented balancing assessment.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Section 6 -->
+        <div class="policy-section">
+            <h2>6. Wallet-to-Notification Linkage &amp; Commercialisation Guarantee</h2>
+            <div class="subsection-card">
+                <h3>A. Association Disclosure</h3>
+                <p>When you configure an alert, DefiRilla associates the public wallet address you provide with your selected notification destination (Telegram Chat ID or Email address) in our internal database. This association exists solely to route risk alerts regarding that wallet to your destination.</p>
+            </div>
+            <div class="subsection-card">
+                <h3>B. Commercialisation Guarantee</h3>
+                <p>DefiRilla does not sell, rent, license, trade, or monetize your wallet addresses, wallet-to-notification associations, portfolio data, or alert configurations to third parties for advertising, cross-site profiling, or behavioral targeting.</p>
+            </div>
+        </div>
+
+        <!-- Section 7 -->
+        <div class="policy-section">
+            <h2>7. Analytics, Cookies &amp; Global Privacy Control (GPC)</h2>
+            <div class="subsection-card">
+                <h3>A. Google Analytics Safeguards</h3>
+                <p>We utilize Google Analytics to analyze platform traffic patterns and optimize system performance.</p>
+            </div>
+            <div class="subsection-card">
+                <h3>B. Cookie Preferences, Consent &amp; GPC Signals</h3>
+                <p><strong>Cookie Consent &amp; Withdrawal:</strong> Non-essential analytical cookies (such as Google Analytics) are blocked by default and are only deployed if you provide affirmative opt-in consent via our cookie banner. You may withdraw this consent at any time via our cookie preference center; withdrawal will not affect the lawfulness of processing that occurred before withdrawal.</p>
+                <p><strong>Global Privacy Control:</strong> Where required by applicable law, the Platform also recognizes and processes Global Privacy Control (GPC) opt-out preference signals to automatically suppress non-essential tracking.</p>
+            </div>
+        </div>
+
+        <!-- Section 8 -->
+        <div class="policy-section">
+            <h2>8. Infrastructure &amp; Third-Party Service Providers</h2>
+            <p><strong>Cloud Infrastructure Providers:</strong> DefiRilla uses third-party cloud infrastructure providers, including Oracle, Heroku, and Google Cloud, as applicable, to host and operate components of the Platform. These providers may process technical information, application data, and other information necessary to provide the infrastructure services.</p>
+            <p><strong>Telegram (Optional Destination):</strong> If you elect to receive alerts via Telegram, only your Telegram Chat ID and the alert message text are transmitted via the official Telegram Bot API; Telegram acts as an independent controller for that data and processes it subject to Telegram's own Privacy Policy.</p>
+            <p><strong>Analytics Tooling:</strong> Google Analytics is used for website and product analytics and is configured to operate only after obtaining applicable user consent.</p>
+            <p>Depending on the network and technical configuration, RPC and indexing providers may process wallet addresses, network requests, query metadata and related on-chain data. Their processing is governed by their own privacy notices and, where applicable, contractual arrangements with DefiRilla. These providers may process information in Australia or overseas, including in the United States, depending on the service and configured processing location.</p>
+        </div>
+
+        <!-- Section 9 -->
+        <div class="policy-section">
+            <h2>9. International Data Transfers</h2>
+            <p>DefiRilla operates from Australia and uses third-party cloud infrastructure providers that may process personal information in Australia and overseas, including the United States. The specific location depends on the provider, service, and configured hosting location.</p>
+            <p><strong>EEA &amp; UK Users:</strong> For transfers originating from the European Economic Area or the United Kingdom we rely on legally recognized transfer mechanisms and appropriate safeguards including Standard Contractual Clauses (SCCs) where applicable.</p>
+            <p><strong>Australian Users:</strong> We take reasonable steps in accordance with Australian Privacy Principle (APP) 8 to ensure that overseas infrastructure providers handle personal information consistently with the APPs.</p>
+        </div>
+
+        <!-- Section 10 -->
+        <div class="policy-section">
+            <h2>10. Data Retention Policy</h2>
+            <p>We retain personal data only for as long as necessary to fulfill the operational purposes for which it was collected:</p>
+            <ul class="bullet-list">
+                <li><strong>Wallet Addresses &amp; Notification Destinations:</strong> Retained in our internal database while your alerting tripwire remains active. Following deletion or alert cancellation, we delete the relevant wallet address, notification destination and alert configuration from active production systems within a reasonable operational period. Copies may temporarily remain in encrypted backups, security logs, disaster-recovery systems or third-party systems where necessary for security, legal compliance or ordinary backup management. Such copies are protected from ordinary use and deleted in accordance with the applicable retention schedule. If an alerting tripwire remains inactive (i.e., undeliverable or unacknowledged) for 3 consecutive months, we may deactivate and delete the associated wallet address and notification mapping.</li>
+                <li><strong>Blockchain Query Logs &amp; Technical Server Logs:</strong> Processed on our managed infrastructure for system stability, security auditing and debugging. Ordinary logs are retained for a maximum of 90 days, after which they are automatically deleted. Records may be retained longer where reasonably necessary for an active security investigation, legal compliance or dispute resolution.</li>
+                <li><strong>Analytics Data:</strong> Retained in accordance with Google Analytics retention settings under anonymized parameters.</li>
+            </ul>
+        </div>
+
+        <!-- Section 11 -->
+        <div class="policy-section">
+            <h2>11. Security Safeguards</h2>
+            <p>DefiRilla maintains appropriate technical and organizational security measures designed to protect personal information stored and processed on infrastructure managed by DefiRilla and provided by third-party cloud infrastructure providers.</p>
+            <ul class="policy-list">
+                <li>Enforced Encryption-in-Transit (TLS/HTTPS) across all web endpoints and API communications.</li>
+                <li>Encryption-at-Rest for internal databases and data stores.</li>
+                <li>Least-privilege administrative access controls and credential management.</li>
+                <li>Routine monitoring for system vulnerabilities and unauthorized access attempts.</li>
+            </ul>
+        </div>
+
+        <!-- Section 12 -->
+        <div class="policy-section">
+            <h2>12. Your Privacy Rights (GDPR &amp; Australian Privacy Framework)</h2>
+            <p>Depending on your geographic location, you may exercise specific rights regarding your personal information:</p>
+            
+            <h3>European Economic Area (EEA) &amp; United Kingdom (GDPR / UK GDPR)</h3>
+            <ul class="bullet-list">
+                <li><strong>Right of Access &amp; Rectification:</strong> Request confirmation, copies, or corrections of the personal data we hold about you.</li>
+                <li><strong>Right to Erasure ("Right to be Forgotten"):</strong> Request deletion of your wallet address and notification mappings from our active databases.</li>
+                <li><strong>Right to Restriction or Objection:</strong> Request restriction of processing or object to certain processing where the applicable data protection law provides that right.</li>
+                <li><strong>Right to Data Portability:</strong> Request a structured machine-readable copy of your active configurations.</li>
+                <li><strong>Right to Withdraw Consent:</strong> Where processing is based on consent (e.g., analytics), withdraw that consent at any time without affecting prior lawful processing.</li>
+            </ul>
+
+            <h3>Australia (Privacy Act 1988 / APPs)</h3>
+            <ul class="bullet-list">
+                <li><strong>Access &amp; Correction:</strong> Request access to or correction of personal information held by DefiRilla.</li>
+                <li><strong>Complaints Handling:</strong> Lodge an enquiry or complaint regarding privacy handling directly with us.</li>
+            </ul>
+
+            <p>We respond to privacy requests within the timeframe required by applicable law. Under the GDPR and UK GDPR, we generally respond within one month and may extend that period by up to two further months where permitted for complex or numerous requests; we will notify you of any extension and the reason for it. For Australian requests, we will respond within a reasonable period in accordance with the Privacy Act 1988 (Cth) and applicable Australian Privacy Principles. We may need to verify your identity before processing a request. To exercise your rights, contact us at <a href="mailto:support@defirilla.com">support@defirilla.com</a>.</p>
+        </div>
+
+        <!-- Section 13 -->
+        <div class="policy-section">
+            <h2>13. United States Privacy Rights (CCPA/CPRA and Other Applicable State Laws)</h2>
+            <p>If you reside in California or another US state with applicable privacy legislation, you may have additional rights regarding your personal information, subject to statutory limitations:</p>
+            <ul class="bullet-list">
+                <li><strong>Right to Know &amp; Access:</strong> You have the right to request details regarding the categories and specific pieces of personal information we have collected, used, disclosed, or processed about you, as required by applicable law.</li>
+                <li><strong>Right to Deletion &amp; Correction:</strong> You have the right to request the deletion or correction of inaccurate personal information held by us, subject to legal exceptions.</li>
+                <li><strong>No Sale or Sharing of Personal Information:</strong> DefiRilla does not sell your personal information or share it for cross-context behavioral advertising (as defined under applicable law).</li>
+                <li><strong>Non-Discrimination:</strong> We will not discriminate against you (such as denying services or altering service quality) for exercising any privacy rights available to you.</li>
+            </ul>
+            <p>To exercise applicable US privacy rights, contact us at <a href="mailto:support@defirilla.com?subject=US%20Privacy%20Request">support@defirilla.com</a> with the subject line "US Privacy Request."</p>
+        </div>
+
+        <!-- Section 14 -->
+        <div class="policy-section">
+            <h2>14. Data Deletion Limitations &amp; Blockchain Immutability</h2>
+            <p>When you delete an alert configuration, we delete the associated wallet address, alert settings and notification-destination linkage from our active application databases within a reasonable operational period. Deletion may not immediately remove copies held in backups, security logs, disaster-recovery systems or by third-party notification providers and does not remove public blockchain records.</p>
+            <p><strong>Blockchain Disclaimer:</strong> Deletion from DefiRilla does not, and cannot, alter, delete, or remove public transaction records or state data from underlying, immutable blockchain networks.</p>
+        </div>
+
+        <!-- Section 15 -->
+        <div class="policy-section">
+            <h2>15. Children's Privacy</h2>
+            <p>DefiRilla is not directed toward or intended for use by individuals under the age of 18 ("Children"). We do not knowingly collect personal information from children. If we become aware that a child has provided us with personal information, we will take prompt steps to delete such data from our servers.</p>
+        </div>
+
+        <!-- Section 16 -->
+        <div class="policy-section">
+            <h2>16. Automated Decision-Making (ADM) Disclaimer</h2>
+            <p>DefiRilla's automated alerts are technical, rule-based notifications generated from public blockchain data and user-configured monitoring parameters. They are strictly informational and are not intended to make automated legal, credit, financial, or eligibility decisions concerning users.</p>
+        </div>
+
+        <!-- Section 17 -->
+        <div class="policy-section">
+            <h2>17. Data Breach Response</h2>
+            <p>DefiRilla maintains an internal incident response procedure. Suspected personal data breaches are assessed promptly. Where required by applicable law (including under the Australian Notifiable Data Breaches scheme or GDPR Articles 33 and 34), we will notify relevant regulatory authorities and affected individuals within the applicable statutory timelines.</p>
+        </div>
+
+        <!-- Section 18 -->
+        <div class="policy-section">
+            <h2>18. Complaints Handling Process</h2>
+            <p>If you believe DefiRilla has processed your personal information in violation of applicable privacy laws or this Policy:</p>
+            <ul class="bullet-list">
+                <li><strong>Internal Review:</strong> Contact our Privacy Contact directly at <a href="mailto:support@defirilla.com">support@defirilla.com</a>. We will acknowledge and investigate your complaint within a reasonable period.</li>
+                <li><strong>Regulatory Escalation:</strong> If you are unsatisfied with our response, you retain the right to lodge a complaint with your local regulatory authority:
+                    <ul class="nested-bullet-list">
+                        <li><strong>Australia:</strong> Office of the Australian Information Commissioner (OAIC) at <a href="https://www.oaic.gov.au/" target="_blank">www.oaic.gov.au</a>.</li>
+                        <li><strong>EEA/UK:</strong> Your local EU Data Protection Authority or the UK Information Commissioner's Office (ICO).</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Section 19 -->
+        <div class="policy-section">
+            <h2>19. Important Notice: Terms &amp; Risk Disclaimer</h2>
+            <p>This Privacy Policy addresses data collection and privacy practices only. DefiRilla provides informational monitoring and automated notifications only and does not provide financial, investment, legal, or tax advice. Alerts may experience delays or delivery failures due to network congestion or RPC node interruptions. For complete terms governing platform use, please consult our separate Terms of Service.</p>
+        </div>
+
+        <!-- Section 20 -->
+        <div class="policy-section">
+            <h2>20. Contact Information</h2>
+            <p>For all privacy-related questions, data requests, or complaints:</p>
+            <p><strong>Support Email:</strong> <a href="mailto:support@defirilla.com">support@defirilla.com</a><br/>
+            <strong>Registered Address:</strong> 102 Victoria Street, Carlton, Melbourne, Victoria 3053, Australia<br/>
+            <strong>Website:</strong> <a href="https://defirilla.com/" target="_blank">defirilla.com</a></p>
+        </div>
+
+        <div class="section-nav">
+            <a href="index.html" class="nav-button">Return to Main Website</a>
+            <a href="index.html#request" class="nav-button">Monitor Your Wallet's DeFi</a>
+        </div>
+
+        <div class="tab-footer">
+            <p>© 2026 DefiRilla (Brightstart Nominees PTY LTD). All rights reserved.</p>
+            <a href="index.html">Home</a> • 
+            <a href="index.html#demo">Demo</a> • 
+            <a href="index.html#request">Monitor</a> • 
+            <a href="index.html#alerts">Alerts</a> • 
+            <a href="index.html#motivation">Motivation</a> • 
+            <a href="index.html#contact">Contact</a> • 
+            <a href="privacy.html">Privacy Policy</a>
+        </div>
+    </div>
+</div>
+
+<script>
+// Mobile menu toggle
+document.getElementById('menu-toggle').addEventListener('click', function() {
+    const menu = document.getElementById('navbar-menu');
+    menu.classList.toggle('active');
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(event) {
+    const menu = document.getElementById('navbar-menu');
+    const toggle = document.getElementById('menu-toggle');
+    
+    if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+        menu.classList.remove('active');
+    }
+});
+</script>
+
+</body>
+</html>
